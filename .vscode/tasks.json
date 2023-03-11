@@ -9,7 +9,7 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"-IC:/msys64/mingw64/bin/../include/pango-1.0",
-				"-IC:/msys64/mingw64/bin/../include/gtk-4.0",
+				"-IC:/msys64/mingw64/bin/../include/gtk-3.0",
 				"-IC:/msys64/mingw64/bin/../include",
 				"-IC:/msys64/mingw64/bin/../include/glib-2.0",
 				"-IC:/msys64/mingw64/bin/../lib/glib-2.0/include",
