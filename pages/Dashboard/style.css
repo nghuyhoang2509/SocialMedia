@@ -1,0 +1,20 @@
+.ten_clb{
+    background: #ebeeec;
+    color: #e2a509;
+    font-family: "Open Sans";
+    font-weight: bold;
+    font-size: larger;
+}
+.green_bg{
+    background: #d1f4d1;
+    color: #f2f2f2;
+    font-family: "Open Sans";
+    font-weight: bold;
+}
+.yellow_button{
+    background: rgb(223, 211, 197);
+    color: #141006;
+    font-family: "Open Sans";
+    font-weight: bold;
+
+}
