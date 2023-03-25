@@ -11,8 +11,9 @@ GtkBuilder *builder;
 GtkWidget *window;
 GtkCssProvider *provider;
 
-char data_message[14][100] = {"Hi", "Hello", "How are you today hshjjh shdjahd hjhasda hjsdhasdh hjahdjashd hjhasd", "I'm good, And you", "I'm slepy", "What do you doing", "I play game", "yub, what is your game", "LOL, do you want enjoy with me", "Ok", "What time do you want play", "hmmmm", "Tonight", "20h"};
+char data_message[14][100] = {"Hi hello hello hello hello hello hello hello hello hello hello", "Hello", "How are you today", "I'm good, And you", "I'm slepy", "What do you doing", "I play game", "yub, what is your game", "LOL, do you want enjoy with me", "Ok", "What time do you want play", "hmmmm", "Tonight", "20h"};
 int data_message_type[14] = {0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0};
+int n = 14;
 
 void css_set(GtkWidget *g_widget, GtkCssProvider *provider)
 {
@@ -38,7 +39,7 @@ int main(int agrc, char *agrv[])
     GtkWidget *input_message = GTK_WIDGET(gtk_builder_get_object(builder, "input_message"));
 
     GtkListBox *listbox = GTK_LIST_BOX(container_list_message);
-    for (int i = 0; i <= 13; i++)
+    for (int i = 0; i <= n; i++)
     {
         GtkWidget *label = gtk_label_new(data_message[i]);
         GtkWidget *row = gtk_list_box_row_new();
@@ -55,8 +56,10 @@ int main(int agrc, char *agrv[])
             gtk_widget_set_halign(row, GTK_ALIGN_END);
             gtk_style_context_add_class(context, "my_message");
         }
+        gtk_label_set_line_wrap(GTK_LABEL(label), TRUE);
+        gtk_label_set_line_wrap_mode(GTK_LABEL(label), PANGO_WRAP_WORD);
         gtk_container_add(GTK_CONTAINER(row), label);
-        gtk_list_box_insert(listbox, row, -1);
+        gtk_list_box_insert(listbox, row, i);
     }
     gtk_container_foreach(GTK_CONTAINER(listbox), (GtkCallback)css_set, provider);
 
