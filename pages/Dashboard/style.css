@@ -1,0 +1,27 @@
+.ten_clb {
+  color: #4ad97c;
+  font-family: "Open Sans";
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.yellow_button {
+  color: white;
+  background: #4ad97c;
+  font-family: "Open Sans";
+  border: none;
+  font-weight: bold;
+}
+
+.container_button {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 100px;
+  box-shadow: 1px 1px 2px black;
+}
+
+.windows {
+  background-image: linear-gradient(45deg, #4ad97c, #f2bc1b);
+}
