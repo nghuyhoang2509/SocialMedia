@@ -10,6 +10,7 @@
 #include <ctype.h>
 #include <curl/curl.h>
 #include <json-c/json.h>
+#include <regex.h>
 
 GtkBuilder *builder;
 GtkWidget *window;
@@ -35,18 +36,15 @@ char *FULLNAME;
 char *EMAIL;
 char *ID;
 
-
-
-struct MemoryStruct
+struct memory_struct
 {
     char *memory;
     size_t size;
 };
-
-static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
+static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, void *userp)
 {
     size_t realsize = size * nmemb;
-    struct MemoryStruct *mem = (struct MemoryStruct *)userp;
+    struct memory_struct *mem = (struct memory_struct *)userp;
 
     char *ptr = realloc(mem->memory, mem->size + realsize + 1);
     if (!ptr)
@@ -63,21 +61,32 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 
     return realsize;
 }
-char *combineStrings(const char *str1, const char *str2){
-    int len1 = strlen(str1);
-    int len2 = strlen(str2);
-    char *result = (char *)malloc(len1 + len2 + 1); // Cấp phát bộ nhớ động cho chuỗi kết quả
-    strcpy(result, str1);                           // Sao chép chuỗi đầu tiên vào chuỗi kết quả
-    strcat(result, str2);                           // Ghép chuỗi thứ hai vào chuỗi kết quả
-    return result;                                  // Trả về con trỏ chứa địa chỉ của chuỗi kết quả
+int validate_email(char *email)
+{
+    char *pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
+    regex_t regex;
+    int reti = regcomp(&regex, pattern, REG_EXTENDED);
+    reti = regexec(&regex, email, 0, NULL, 0);
+    if (!reti)
+    {
+        return 1;
+    }
+    else if (reti == REG_NOMATCH)
+    {
+        return 0;
+    }
+
+    regfree(&regex);
 }
-char *request(char *method, char *data){
+char *request(char *method, char *data)
+{
     CURL *curl;
     CURLcode res;
 
     // JSON data to be sent in the request body
 
-    struct MemoryStruct chunk;
+    struct memory_struct chunk;
 
     chunk.memory = malloc(1); /* will be grown as needed by the realloc above */
     chunk.size = 0;
@@ -87,9 +96,9 @@ char *request(char *method, char *data){
     if (curl)
     {
         // Set the URL for the request
-        char *result = combineStrings("http://nghuyhoang2509.click/", method);
-        curl_easy_setopt(curl, CURLOPT_URL, result);
-        free(result);
+        char URL[100];
+        sprintf(URL, "http://nghuyhoang2509.click/%s", method);
+        curl_easy_setopt(curl, CURLOPT_URL, URL);
 
         // Set the HTTP headers
         struct curl_slist *headers = NULL;
@@ -108,7 +117,7 @@ char *request(char *method, char *data){
         curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
 
         // Set up the write callback function to handle the response
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_memory_callback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
 
         // Perform the request
@@ -127,12 +136,14 @@ char *request(char *method, char *data){
         curl_slist_free_all(headers);
     }
 }
-void on_main_window(){
+void on_main_window()
+{
     gtk_widget_hide(sign_in_frame);
     gtk_widget_show(main_window);
     // gtk_widget_destroy(sign_in_window);
 }
-void on_entry_insert_spacebar(GtkWidget *e){
+void on_entry_insert_spacebar(GtkWidget *e)
+{
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(e));
     gint length = strlen(text);
     for (gint i = 0; i < length; i++)
@@ -145,7 +156,8 @@ void on_entry_insert_spacebar(GtkWidget *e){
         }
     }
 }
-void on_sign_in_btn_clicked(GtkWidget *e){
+void on_sign_in_btn_clicked(GtkWidget *e)
+{
     // gchar *t = gtk_entry_get_text(email_sign_in);
     char *markup = "";
     gpointer email = gtk_entry_get_text(email_sign_in);
@@ -154,6 +166,12 @@ void on_sign_in_btn_clicked(GtkWidget *e){
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
+        return;
+    }
+    else if (strlen(pass) < 8)
+    {
+        markup = "<span foreground='#FF0000'>Password must be 8 characters or more!</span>";
+        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
     char data[1000];
@@ -170,7 +188,7 @@ void on_sign_in_btn_clicked(GtkWidget *e){
     }
     else
     {
-        printf("%s\n",response);
+        printf("%s\n", response);
         json_object *id_obj;
         if (json_object_object_get_ex(root, "_id", &id_obj))
         {
@@ -191,26 +209,27 @@ void on_sign_in_btn_clicked(GtkWidget *e){
         EMAIL = json_object_get_string(json_object_object_get(root, "mail"));
         printf("mail: %s\n", EMAIL);
 
-        const char* error = json_object_get_string(json_object_object_get(root, "error"));
+        const char *error = json_object_get_string(json_object_object_get(root, "error"));
         printf("error: %s\n", error);
 
         json_object_put(root);
 
-        if (error != NULL){
+        if (error != NULL)
+        {
             char error_status[1000];
-            sprintf(error_status,"<span foreground='#FF0000'>%s</span>",error);
+            sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(sign_in_check), error_status);
         }
-        else{
+        else
+        {
             markup = "<span foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
             on_main_window();
-        }   
+        }
     }
-    
-    
 }
-void on_sign_up_btn_clicked(GtkWidget *e){
+void on_sign_up_btn_clicked(GtkWidget *e)
+{
     char *markup = "";
     gpointer fullname = gtk_entry_get_text(fullname_sign_up);
     gpointer email = gtk_entry_get_text(email_sign_up);
@@ -218,6 +237,18 @@ void on_sign_up_btn_clicked(GtkWidget *e){
     if (strlen(fullname) == 0 || strlen(email) == 0 || strlen(pass) == 0)
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
+        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
+        return;
+    }
+    else if(!validate_email(email))
+    {
+        markup = "<span foreground='#FF0000'>Wrong email format!</span>";
+        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
+        return;
+    }
+    else if (strlen(pass) < 8)
+    {
+        markup = "<span foreground='#FF0000'>Password must be 8 characters or more!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
@@ -236,40 +267,46 @@ void on_sign_up_btn_clicked(GtkWidget *e){
     }
     else
     {
-        printf("%s\n",response);
+        printf("%s\n", response);
 
-        const char* error = json_object_get_string(json_object_object_get(root, "error"));
+        const char *error = json_object_get_string(json_object_object_get(root, "error"));
         printf("error: %s\n", error);
 
-        const char* success = json_object_get_string(json_object_object_get(root, "success"));
+        const char *success = json_object_get_string(json_object_object_get(root, "success"));
         printf("success: %s\n", success);
 
         json_object_put(root);
 
-        if (error != NULL){
+        if (error != NULL)
+        {
             char error_status[1000];
-            sprintf(error_status,"<span foreground='#FF0000'>%s</span>",error);
+            sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(sign_up_check), error_status);
         }
-        else{
+        else
+        {
             char success_status[1000];
-            sprintf(success_status,"<span foreground='#00FF00'>%s</span>",success);
+            sprintf(success_status, "<span foreground='#00FF00'>%s</span>", success);
             gtk_label_set_markup(GTK_LABEL(sign_up_check), success_status);
-        }   
+        }
     }
 }
-void on_sign_up_now_btn_clicked(GtkWidget *e){
+void on_sign_up_now_btn_clicked(GtkWidget *e)
+{
     gtk_widget_hide(sign_in_frame);
     gtk_widget_show(sign_up_frame);
 }
-void on_sign_in_now_btn_clicked(GtkWidget *e){
+void on_sign_in_now_btn_clicked(GtkWidget *e)
+{
     gtk_widget_hide(sign_up_frame);
     gtk_widget_show(sign_in_frame);
 }
-void window_destroy(GtkWidget *w, gpointer window){
+void window_destroy(GtkWidget *w, gpointer window)
+{
     gtk_widget_destroy(window);
 }
-void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget){
+void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget)
+{
 
     GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
     gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
