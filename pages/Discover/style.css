@@ -1,0 +1,21 @@
+.h1{
+   color: white;
+   font-family: 'Klavia', Times, serif;
+   font-weight: 900;
+   font-size: 28px;
+   font-style: normal;
+   background-color: #4AD97C ;
+
+}
+.background{
+    background-image: url("https://f-code.tech/static/media/background.5d17ffe36988d38fdec1.png") ;
+}
+.body{
+    color: black;
+    background-color: white;
+}
+.h2{
+    color: #F2BC1B;
+    font-size: 18px;
+    font-weight: 900;
+}
