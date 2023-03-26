@@ -53,8 +53,8 @@
       <class name="text"/>
     </style>
   </object>
-  <object class="GtkWindow" id="test_window">
-    <property name="name">test_window</property>
+  <object class="GtkWindow" id="window">
+    <property name="name">window</property>
     <property name="width-request">1000</property>
     <property name="height-request">700</property>
     <property name="can-focus">False</property>
@@ -127,6 +127,7 @@
                         <property name="name">password_sign_in</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="visibility">False</property>
                         <property name="invisible-char">●</property>
                         <property name="placeholder-text" translatable="yes">Password</property>
                         <style>

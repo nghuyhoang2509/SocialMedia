@@ -7,18 +7,7 @@
 .white_bg{
     background: #f6f5f4;
 }
-@keyframes example {
-    0%   {background-color: #4ad97c;}
-    25%  {background-color: #d6f2c9;}
-    50%  {background-color: #e2f2a7;}
-    100% {background-color: #f2bc1b;}
-  }
-/*make a loop animation*/
-/* .test_animation{
-    
-    animation-name: example;
-    animation-duration: 30s;
-} */
+
 .shadow {
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
 }
