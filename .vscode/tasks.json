@@ -54,7 +54,8 @@
 				"-lgobject-2.0",
 				"-lglib-2.0",
 				"-lintl",		
-				"-lcurl",			
+				"-lcurl",
+				"-ljansson",		
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
