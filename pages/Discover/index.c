@@ -1,4 +1,6 @@
-#include <sddio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
 #include <gtk/gtk.h>
 #include <gtk/gtkx.h>
 #include <signal.h>
@@ -17,7 +19,7 @@ int main(int agrc, char *agrv[]){
 
     builder = gtk_builder_new_from_file("Discover.glade");
 
-    window = GTK_WIDGET(gtk_builder_get_objects(builder, "discover"));
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "discover"));
 
     g_signal_connect(window,"destroy", G_CALLBACK(gtk_main_quit),NULL);
 
