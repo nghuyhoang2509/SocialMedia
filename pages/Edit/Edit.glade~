@@ -46,7 +46,7 @@
                 <child>
                   <object class="GtkEntry" id="fullname">
                     <property name="width-request">400</property>
-                    <property name="height-request">50</property>
+                    <property name="height-request">40</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="opacity">0.59999999999999998</property>
@@ -65,7 +65,7 @@
                 <child>
                   <object class="GtkEntry" id="password">
                     <property name="width-request">400</property>
-                    <property name="height-request">50</property>
+                    <property name="height-request">40</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="opacity">0.59999999999999998</property>
@@ -84,7 +84,7 @@
                     <property name="label" translatable="yes">Save</property>
                     <property name="name">save</property>
                     <property name="width-request">400</property>
-                    <property name="height-request">50</property>
+                    <property name="height-request">40</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
