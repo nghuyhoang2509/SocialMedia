@@ -1,20 +1,27 @@
-.ten_clb{
-    background: #ebeeec;
-    color: #e2a509;
-    font-family: "Open Sans";
-    font-weight: bold;
-    font-size: larger;
+.ten_clb {
+  color: #4ad97c;
+  font-family: "Open Sans";
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
+  background-color: white;
 }
-.green_bg{
-    background: #d1f4d1;
-    color: #f2f2f2;
-    font-family: "Open Sans";
-    font-weight: bold;
-}
-.yellow_button{
-    background: rgb(223, 211, 197);
-    color: #141006;
-    font-family: "Open Sans";
-    font-weight: bold;
 
+.yellow_button {
+  color: white;
+  background: #4ad97c;
+  font-family: "Open Sans";
+  border: none;
+  font-weight: bold;
+}
+
+.container_button {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 100px;
+  box-shadow: 1px 1px 2px black;
+}
+
+.windows {
+  background-image: linear-gradient(45deg, #4ad97c, #f2bc1b);
 }
