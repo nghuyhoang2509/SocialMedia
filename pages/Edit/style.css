@@ -1,20 +1,33 @@
-.green_bg{
-    background: #4ad97c;
-    color: #f2f2f2;
-    font-family: "Open Sans";
-    font-weight: bold;
+.green_bg {
+  background: #4ad97c;
+  color: #f2f2f2;
+  font-family: "Open Sans";
+  font-weight: 800;
+  font-size: 20px;
 }
 .shadow {
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+}
+.green_layout {
+  background: #f2f2f2;
+  color: darkgray;
+}
+.green_button {
+  background: #4ad97c;
+  color: #f2f2f2;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
 
+.layout {
+  padding: 0px 20px;
 }
-.green_layout{
-    background: #f2f2f2;
-    color: darkgray;
+
+.btn {
+  border-radius: 15px;
+  margin: 0px 30px;
 }
-.green_button{
-    background: #4ad97c;
-    color: #f2f2f2;
-    font-family: "Open Sans";
-    font-weight: bold;
+
+.box {
+  border-radius: 20px;
 }
