@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow">
+    <property name="can-focus">False</property>
+    <property name="default-width">600</property>
+    <property name="default-height">800</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="shadow-type">in</property>
+        <child>
+          <object class="GtkViewport">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">F-Code Discover</property>
+                    <style>
+                      <class name="h1"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkListBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="selection-mode">none</property>
+                    <property name="activate-on-single-click">False</property>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">userf17@gmmail.com</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="h2"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
+----------------------------------------------------------------------
+Xin chào mọi người đã quay lại nhịp sống sau Tết, chúng ta sẽ cùng F-Code khởi động hoạt động học thuật mở màn đầu tiên trong chuỗi các hoạt động thú vị sắp tới: TECHAWAY
+Giới thiệu đây là một hoạt động học thuật với mục đích tạo sân chơi cho các bạn tham gia cùng chia sẻ những kiến thức xung quanh thế giới công nghệ và lập trình. Đây sẽ là cơ hội để các bạn tham gia cùng viết lên những câu chuyện được đúc kết từ góc nhìn trải nghiệm và học tập của các bạn, đồng thời còn giúp bạn có thể tự rèn luyện khả năng tổng hợp kiến thức thông qua việc viết bài chia sẻ cho cộng đồng.
+1. CHỦ ĐỀ SHARING
+🔹Giới thiệu và hướng dẫn sử dụng các Tips, Keys, công cụ, phần mềm giúp code hiệu quả và nhanh hơn.
+🔹Chia sẻ về framework, các lệnh, thư viện đặc biệt hỗ trợ code.
+🔹Hướng dẫn cách code một chức năng bất kỳ hoặc chia sẻ kiến thức lập trình.
+🔹Chia sẻ kinh nghiệm hay kĩ năng cần có cho một lập trình viên, chẳng hạn như cách cách thực hiện một project, lộ trình học code hiệu quả và hay các kiến thức thú vị thuộc lĩnh vực công nghệ thông tin.
+2. THỜI GIAN
+⌛Hạn chót điền form đăng ký: 11:59 pm - 10.02.2022
+📝 Link đăng kí: TechAway - Code the Dream (Nhóm 2 người chỉ cần Leader điền form)(Nhóm 2 người chỉ cần Leader điền form)
+Vòng 1: Nộp bài về cho ban tổ chức: 11.02.2023 - 10.03.2023
+Vòng 2: Bình chọn trên fanpage: 13.03.2023 - 30.04.2023
+Công bố điểm: 17.05.2023
+3. ĐỐI TƯỢNG THAM GIA
+👤 Thành viên F-Code
+‼️ Đối với thành viên mới F-18 bắt buộc tham gia.
+4. HÌNH THỨC THAM GIA
+▫️ Nhóm 2 người hoặc làm cá nhân (khuyến khích làm theo nhóm 2 người).
+▫️ Đăng ký tham gia tại link kèm theo bài viết. Đối với nhóm 2 người chỉ cần leader điền form đăng ký và nộp bài về cho ban tổ chức.
+▫️ Các bạn có thể nhờ sự trợ giúp từ các anh chị/ bạn bè/ thầy cô để lên ý tưởng cho bài viết hoặc viết theo chủ đề tự chọn.
+5. CÁCH THỨC NỘP BÀI VÀ CÁC VÒNG THI
+Nộp bài :
+▫️ Nộp bài sharing dưới dạng file .doc /.pdf /.ppt, link doc/drive tạo bằng email cá nhân tới địa chỉ
+email : fcode.techaway@gmail.com
+▫️ Nộp bài thi bằng email cá nhân (Không dùng mail FPT)
+▫️ Email nộp bài phải có nội dung nghiêm túc, lịch sự.
+▫️ Cú pháp đặt tên bài và chủ đề mail: [Techaway - Họ và Tên - MSSV] tên bài Sharing
+(VD: [Techaway - Nguyễn Văn A - SE123456] Tomcat).
+Các vòng thi :
+🎯 Vòng 1: Vòng kiểm duyệt
+Bài viết sẽ được ban học thuật kiểm duyệt nội dung, chấm điểm chuyên môn và đưa ra nhận xét bởi leader các crew.
+🎯 Vòng 2: Vòng bình chọn
+- Top 8 bài đăng thông qua vòng kiểm duyệt sẽ được đăng tại group private của CLB để tiến hành bình chọn lần 1.
+-Top 4 bài có lượt bình chọn lần 1 cao nhất sẽ được đăng lên Fanpage chính thức của CLB để bắt đầu bình chọn ra Top 2 bài sharing được yêu thích nhất.
+6. YÊU CẦU BÀI VIẾT
+Không sai chính tả
+Nội dung bài viết phải liên quan đến học thuật hoặc chia sẻ kiến thức về lập trình
+Bài viết có chủ đề rõ ràng, nội dung có chiều sâu
+Không được viết và truyền bá nội dung sai lệch
+Không copy toàn bộ nội dung từ trên mạng
+Có trích dẫn các nguồn tham khảo
+Cú pháp đặt tên bài và chủ đề mail: [Techaway - Họ và Tên - MSSV] tên bài Sharing
+Nộp đúng định dạng file, nếu sử dụng link doc/ drive thì tạo link bằng email cá nhân
+(VD: [Techaway - Nguyễn Văn A - SE123456] Tomcat)
+7. BỐ CỤC BÀI VIẾT THAM KHẢO
+🔹Mở bài: Giới thiệu và dẫn dắt nội dung
+🔹Thân bài:
+-Các kiến thức, khái niệm cơ bản
+-Nội dung chuyên sâu
+-Kiến thức mở rộng (nếu có)
+-Liên hệ thực tế
+-Demo (nếu có)
+🔹Kết thúc: tóm tắt lại ý chính bài viết cần nắm
+8. CÁCH THỨC TÍNH ĐIỂM
+Khuyến khích sáng tạo: tạo demo, quay video hướng dẫn, …. (+5 điểm)
+Điểm bình chọn trên fanpage:
+1 like = +1 điểm
+1 tim = +3 điểm
+1 share = +3 điểm
+Các reaction khác = +2 điểm (trừ phẫn nộ)
+9. GIẢI THƯỞNG
+Nhằm thúc đẩy tinh thần tham gia của mọi người thì CLB đã chuẩn bị rất nhiều phần quà hấp dẫn với tổng giá trị trên dưới 10.000.000 VND
+🥇 Giải nhất: 300.000 VNĐ tiền mặt
+🥈 Giải nhì: 250.000 VNĐ tiền mặt
+🥉 2 Giải khuyến khích: Tổng giải thưởng 100.000VNĐ tiền mặt chia đôi
+💛 Hi vọng mọi người sẽ hưởng ứng tham gia tích cực cùng chia sẻ kiến thức bổ ích đến cho nhiều người
+📝 Link đăng kí: TechAway - Code the Dream (Nhóm 2 người chỉ cần Leader điền form)
+—————————————————————
+Mọi thắc mắc xin liên hệ : Nguyễn Gia Linh (Nguyen Lin)
+𝑭-𝑪𝒐𝒅𝒆 - 𝐶𝑜𝑑𝑒 𝑇ℎ𝑒 𝐷𝑟𝑒𝑎𝑚 - 𝐴𝑐𝑎𝑑𝑒𝑚𝑖𝑐 𝐶𝑙𝑢𝑏 𝑓𝑜𝑟 𝐿𝑒𝑎𝑟𝑛𝑖𝑛𝑔 𝑎𝑛𝑑 𝑆ℎ𝑎𝑟𝑖𝑛𝑔 𝐼𝑇 𝐾𝑛𝑜𝑤𝑙𝑒𝑑𝑔𝑒
+📝 𝐓𝐞𝐜𝐡𝐚𝐰𝐚𝐲 - Chuỗi bài viết học thuật để chia sẻ kiến thức của các thành viên CLB F-Code.
+📖 𝐅-𝐂𝐨𝐝𝐞 𝐁𝐥𝐨𝐠 - Nơi mà các thành viên CLB chia sẻ kiến thức thông qua các bài viết.
+https://fcodehcm.wordpress.com
+📧 𝐄𝐦𝐚𝐢𝐥: 𝑓𝑐𝑜𝑑𝑒.𝑓𝑝𝑡𝑢ℎ𝑐𝑚@𝑔𝑚𝑎𝑖𝑙.𝑐𝑜𝑚</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="body"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="h2"/>
+                            </style>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="background"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="margin-top">10</property>
+                                <property name="label" translatable="yes">userf17@gmmail.com</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="h2"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">CHÚC MỪNG NĂM QUÝ MÃO✨
+🎆 Giây phút cuối năm cận kề đã đến, có lẽ là chúng ta nên nhâm nhi vài ly rượu ngọt 🥂 trong những thời khắc cuối cùng của một vòng tuần hoàn đang sắp khép lại, gói trọn những cảm xúc tuyệt nhất mà một năm qua chúng ta đã sống, đã làm, đã học tập và đã trải nghiệm.
+🎉 Đối với CLB F-Code chúng ta, năm vừa rồi hẳn là một năm có nhiều chuyện để kể, một năm tuy có nhiều biến cố và thiếu sót nhưng đi kèm với nhiều sự thay đổi mới và cả những thành công trong cải cách và phát triển CLB.
+🎉 Thay mặt cho CLB xin gửi lời chúc năm mới tới toàn thể thành viên của đại gia đình F-Code. Một năm mới tràn đầy năng lượng, sức khỏe bền bỉ, gia đình thịnh vượng, cuộc sống hạnh phúc bên người thân yêu và nhiều may mắn trong công việc, học tập.
+🎉 Hy vọng F-Code của năm 2023 là một F-Code phiên bản mới, hoàn thiện hơn và tốt hơn năm vừa rồi. Điều đó chắc hẳn sẽ cần đến nhiều sự nỗ lực và chung tay góp sức của các thành viên chúng ta. Hy vọng thành viên F-Code sẽ đoàn kết để cùng nhau tiếp nối sứ mệnh xây dựng một CLB học thuật lập trình, phát triển mạnh cả về học thuật và con người. Trở thành một nơi tin cậy đáng gửi gắm cho thế hệ F-Code tiếp theo.
+Một lần nữa,
+🏮CHÚC MỪNG NĂM MỚI F-CODE🏮</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="body"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="h2"/>
+                            </style>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="background"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="margin-top">10</property>
+                                <property name="label" translatable="yes">userf17@gmmail.com</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="h2"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">THÔNG BÁO ĐÓNG PHÍ TIỀN ÁO F-CODE
+Sau khi tổng hợp số lượng, giá áo F-Code cho clb mình cụ thể như sau:
+💸 Đơn giá: 185.000 VNĐ / áo
+⌛Hạn chót đóng tiền áo: Hết thứ 6, 20.01.2023
+‼ (Yêu cầu đóng phí Đầy đủ và Đúng thời hạn. Trễ hạn: giá áo là 200.000VNĐ/áo)
+🔗Thông tin chi tiết đơn đặt áo của mỗi thành viên: Link
+💳Hình thức đóng tiền: Chỉ nhận chuyển khoản qua tài khoản thủ quỹ:
+Chủ tài khoản Trần Nguyễn Như Nguyên
+Ngân hàng VCB: 1025250901
+Momo: 0865181979
+Nội dung chuyển khoản: Họ tên _ MSSV
+☺️ Thiết kế áo năm nay có sự thay đổi về logo và tối giản hơn nhưng vía áo vẫn không đổi nhé !
+Hi vọng mọi người đóng phí đầy đủ đúng hạn để chúng ta có áo mặc đi chơi hậu Tết.</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="body"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="h2"/>
+                            </style>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="background"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="margin-top">10</property>
+                                <property name="label" translatable="yes">userf17@gmmail.com</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="h2"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="label" translatable="yes">Tổ Chức Hoạt Động Học Thuật Cho Tân Thành Viên F18
+--------------------------------------------------------------------------
+🎉 Chúc mừng các bạn đã trở thành tân thành viên của câu lạc bộ F-code !!!
+Chắc hẳn với sự nỗ lực hết mình để hoàn thành thử thách vào câu lạc bộ thì các hoạt động học thuật giúp nâng cao kiến thức chính là điều mà các bạn đang mong chờ nhất, có phải không ? Và cũng không để các bạn phải chờ đợi lâu, câu lạc bộ đã bắt đầu triển khai những hoạt động đầu tiên dành cho các bạn thành viên mới của chúng ta.
+🟣 MÔ TẢ HOẠT ĐỘNG
+Trong thời gian sắp tới, Clb sẽ triển khai hoạt động học thuật đầu tiên khóa Train C - khóa lập trình cơ bản chung cho toàn bộ các bạn. Khóa học sẽ kéo dài trong khoảng 1 - 2 tháng. Sau khi hoàn thành khóa lập trình căn bản, các bạn sẽ được tự do đăng ký vào crew mình muốn bao gồm 4 crew: Front-end, Back-end, AI và Security.
+🟣 Để nắm được tình hình kiến thức các bạn có được, bạn hãy nhanh chóng giúp chúng mình điền form khảo sát dưới đây trước khi khóa hoạt động Train C đầu tiên diễn ra nhé.
+⌛Hạn chót điền form: 23h59, chủ nhật, 01.01.2022
+📌Link: https://forms.gle/PipMF39Fb7qB3H586
+🔶 Lưu ý: Trước khi bắt đầu hoạt động học thuật, các bạn nhớ hãy vào nhóm Discord chung của F-Code
+‼️ Bắt buộc đổi tên ‼️ theo cú pháp: Viết tắt mỗi họ và tên lót bằng các ký tự in hoa.
+Ví dụ: Nguyễn Văn Anh --- đổi tên ---&gt; NV.Anh K18
+(Không đổi tên sẽ bị kick khỏi discord)
+Link: https://discord.gg/v5vE8JXG</property>
+                                <property name="wrap">True</property>
+                                <property name="max-width-chars">60</property>
+                                <style>
+                                  <class name="body"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="h2"/>
+                            </style>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="background"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
