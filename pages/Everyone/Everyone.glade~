@@ -2,16 +2,12 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkListStore" id="list_store">
-    <columns>
-      <!-- column-name Id -->
-      <column type="gchararray"/>
-      <!-- column-name Mail -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
+  <!-- interface-css-provider-path style.css -->
   <object class="GtkWindow" id="everyone_page">
     <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <property name="default-width">500</property>
+    <property name="default-height">600</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -34,43 +30,27 @@
           </packing>
         </child>
         <child>
-          <object class="GtkTreeView" id="list_everyone">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="model">list_store</property>
-            <child internal-child="selection">
-              <object class="GtkTreeSelection" id="select_list"/>
-            </child>
+            <property name="shadow-type">in</property>
             <child>
-              <object class="GtkTreeViewColumn" id="id_col">
-                <property name="spacing">10</property>
-                <property name="sizing">fixed</property>
-                <property name="title" translatable="yes">Id</property>
-                <property name="expand">True</property>
-                <property name="sort-indicator">True</property>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
                 <child>
-                  <object class="GtkCellRendererText" id="id_row"/>
-                  <attributes>
-                    <attribute name="style">0</attribute>
-                  </attributes>
+                  <object class="GtkListBox" id="list_box">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="selection-mode">none</property>
+                    <property name="activate-on-single-click">False</property>
+                    <style>
+                      <class name="list_box"/>
+                    </style>
+                  </object>
                 </child>
               </object>
             </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="mail_col">
-                <property name="spacing">10</property>
-                <property name="sizing">fixed</property>
-                <property name="title" translatable="yes">Mail</property>
-                <property name="expand">True</property>
-                <property name="sort-indicator">True</property>
-                <child>
-                  <object class="GtkCellRendererText" id="mail_row"/>
-                </child>
-              </object>
-            </child>
-            <style>
-              <class name="list_box_everyone"/>
-            </style>
           </object>
           <packing>
             <property name="expand">True</property>

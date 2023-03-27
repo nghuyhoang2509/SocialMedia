@@ -1,0 +1,17 @@
+.label_name {
+  color: #4ad97c;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.list_box {
+  padding: 20px 30px;
+}
+
+.container_item {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+  margin: 5px 0px;
+}
