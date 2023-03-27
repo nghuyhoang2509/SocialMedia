@@ -24,6 +24,7 @@
 				"-IC:/msys64/mingw64/bin/../include/atk-1.0",
 				"-DLIBDEFLATE_DLL",
                 "${file}",
+				"${fileDirname}/call_API.c",
 				"-LC:/msys64/mingw64/bin/../lib",
 				"-lgtk-3",
 				"-lgdk-3",
