@@ -7,6 +7,9 @@
 #include <libgen.h>
 #include <math.h>
 #include <stddef.h>
+#include <json-c/json.h>
+#include <regex.h>
+#include <curl/curl.h>
 
 #include "handle.h"
 #include "env.c"
@@ -18,8 +21,6 @@ int main(int agrc, char *agrv[])
     gtk_init(&agrc, &agrv);
 
     PROCESSINIT();
-
-    gtk_main();
 
     return EXIT_SUCCESS;
 }

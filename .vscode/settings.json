@@ -14,6 +14,7 @@
         "handle.h": "c",
         "json.h": "c",
         "regex.h": "c",
-        "tre.h": "c"
+        "tre.h": "c",
+        "curl.h": "c"
     }
 }

@@ -1,40 +1,26 @@
-#include <stdlib.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <gtk/gtkx.h>
-#include <libgen.h>
-#include <math.h>
-#include <ctype.h>
-#include <curl/curl.h>
-#include <json-c/json.h>
-#include <regex.h>
+static GtkBuilder *builder;
+static GtkWidget *window;
+static GtkWidget *sign_in_frame;
+static GtkWidget *sign_up_frame;
+static GtkWidget *main_window;
+static GtkEntry *email_sign_in;
+static GtkEntry *email_sign_up;
+static GtkEntry *password_sign_in;
+static GtkEntry *password_sign_up;
+static GtkEntry *fullname_sign_up;
+static GtkWidget *sign_in_btn;
+static GtkWidget *sign_up_btn;
+static GtkWidget *sign_up_now_btn;
+static GtkWidget *sign_in_now_btn;
+static GtkWidget *text_view;
+static GtkWidget *main_window;
+static GtkWidget *sign_in_check;
+static GtkWidget *sign_up_check;
 
-GtkBuilder *builder;
-GtkWidget *window;
-GtkWidget *sign_in_frame;
-GtkWidget *sign_up_frame;
-GtkWidget *main_window;
-GtkEntry *email_sign_in;
-GtkEntry *email_sign_up;
-GtkEntry *password_sign_in;
-GtkEntry *password_sign_up;
-GtkEntry *fullname_sign_up;
-GtkWidget *sign_in_btn;
-GtkWidget *sign_up_btn;
-GtkWidget *sign_up_now_btn;
-GtkWidget *sign_in_now_btn;
-GtkWidget *text_view;
-GtkWidget *main_window;
-GtkWidget *sign_in_check;
-GtkWidget *sign_up_check;
-
-char *PASSWORD;
-char *FULLNAME;
-char *EMAIL;
-char *ID;
+static const char *PASSWORD;
+static const char *FULLNAME;
+static const char *EMAIL;
+static const char *ID;
 
 struct memory_struct
 {
@@ -79,69 +65,7 @@ int validate_email(char *email)
 
     regfree(&regex);
 }
-char *request(char *method, char *data)
-{
-    CURL *curl;
-    CURLcode res;
 
-    // JSON data to be sent in the request body
-
-    struct memory_struct chunk;
-
-    chunk.memory = malloc(1); /* will be grown as needed by the realloc above */
-    chunk.size = 0;
-    // Initialize libcurl
-    curl = curl_easy_init();
-    curl_global_init(CURL_GLOBAL_ALL);
-    if (curl)
-    {
-        // Set the URL for the request
-        char URL[100];
-        sprintf(URL, "http://nghuyhoang2509.click/%s", method);
-        curl_easy_setopt(curl, CURLOPT_URL, URL);
-
-        // Set the HTTP headers
-        struct curl_slist *headers = NULL;
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-        // Set the request method to POST
-        curl_easy_setopt(curl, CURLOPT_POST, 1L);
-
-        // Set the request body
-        curl_mime *mime;
-        curl_mimepart *part;
-        mime = curl_mime_init(curl);
-        part = curl_mime_addpart(mime);
-        curl_mime_name(part, "data");
-        curl_mime_data(part, data, CURL_ZERO_TERMINATED);
-        curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
-
-        // Set up the write callback function to handle the response
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_memory_callback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
-
-        // Perform the request
-        res = curl_easy_perform(curl);
-        if (res != CURLE_OK)
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-        else
-        {
-            return chunk.memory;
-            // printf("test: %s",chunk.memory);
-        }
-
-        // Clean up
-        curl_mime_free(mime);
-        curl_easy_cleanup(curl);
-        curl_slist_free_all(headers);
-    }
-}
-void on_main_window()
-{
-    gtk_widget_hide(sign_in_frame);
-    gtk_widget_show(main_window);
-    // gtk_widget_destroy(sign_in_window);
-}
 void on_entry_insert_spacebar(GtkWidget *e)
 {
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(e));
@@ -152,7 +76,7 @@ void on_entry_insert_spacebar(GtkWidget *e)
         {
             // Không chấp nhận ký tự Space, xoá nó ra khỏi chuỗi đầu vào
             GtkEntryBuffer *buffer = gtk_entry_get_buffer(GTK_ENTRY(e));
-            gtk_editable_delete_text(GTK_ENTRY(e), i, i + 1);
+            gtk_editable_delete_text(GTK_EDITABLE(GTK_ENTRY(e)), i, i + 1);
         }
     }
 }
@@ -160,8 +84,8 @@ void on_sign_in_btn_clicked(GtkWidget *e)
 {
     // gchar *t = gtk_entry_get_text(email_sign_in);
     char *markup = "";
-    gpointer email = gtk_entry_get_text(email_sign_in);
-    gpointer pass = gtk_entry_get_text(password_sign_in);
+    const gpointer email = (const gpointer)gtk_entry_get_text(email_sign_in);
+    const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_in);
     if (strlen(email) == 0 || strlen(pass) == 0)
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
@@ -188,7 +112,7 @@ void on_sign_in_btn_clicked(GtkWidget *e)
     }
     else
     {
-        printf("%s\n", response);
+        // printf("%s\n", response);
         json_object *id_obj;
         if (json_object_object_get_ex(root, "_id", &id_obj))
         {
@@ -196,21 +120,24 @@ void on_sign_in_btn_clicked(GtkWidget *e)
             if (json_object_object_get_ex(id_obj, "$oid", &oid_obj))
             {
                 ID = json_object_get_string(oid_obj);
-                printf("_id: %s\n", ID);
+                // printf("_id: %s\n", ID);
+                USER.id = ID;
             }
         }
 
         PASSWORD = json_object_get_string(json_object_object_get(root, "password"));
-        printf("password: %s\n", PASSWORD);
+        // printf("password: %s\n", PASSWORD);
 
         FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
-        printf("fullname: %s\n", FULLNAME);
+        // printf("fullname: %s\n", FULLNAME);
+        USER.fullname = FULLNAME;
 
         EMAIL = json_object_get_string(json_object_object_get(root, "mail"));
-        printf("mail: %s\n", EMAIL);
+        // printf("mail: %s\n", EMAIL);
+        USER.mail = EMAIL;
 
         const char *error = json_object_get_string(json_object_object_get(root, "error"));
-        printf("error: %s\n", error);
+        // printf("error: %s\n", error);
 
         json_object_put(root);
 
@@ -224,23 +151,26 @@ void on_sign_in_btn_clicked(GtkWidget *e)
         {
             markup = "<span foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
-            on_main_window();
+            printf("Sign in done");
+            LOGINED = 1;
+            gtk_widget_destroy(window);
+            PROCESSINIT();
         }
     }
 }
 void on_sign_up_btn_clicked(GtkWidget *e)
 {
     char *markup = "";
-    gpointer fullname = gtk_entry_get_text(fullname_sign_up);
-    gpointer email = gtk_entry_get_text(email_sign_up);
-    gpointer pass = gtk_entry_get_text(password_sign_up);
+    const gpointer fullname = (const gpointer)gtk_entry_get_text(fullname_sign_up);
+    const gpointer email = (const gpointer)gtk_entry_get_text(email_sign_up);
+    const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_up);
     if (strlen(fullname) == 0 || strlen(email) == 0 || strlen(pass) == 0)
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
-    else if(!validate_email(email))
+    else if (!validate_email(email))
     {
         markup = "<span foreground='#FF0000'>Wrong email format!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
@@ -305,18 +235,11 @@ void window_destroy(GtkWidget *w, gpointer window)
 {
     gtk_widget_destroy(window);
 }
-void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget)
+
+int Auth()
 {
 
-    GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
-    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
-}
-
-int main(int agrc, char *agrv[])
-{
-
-    gtk_init(&agrc, &agrv);
-    builder = gtk_builder_new_from_file("Login.glade");
+    builder = gtk_builder_new_from_file("./pages/Auth/Auth.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     sign_in_frame = GTK_WIDGET(gtk_builder_get_object(builder, "sign_in_frame"));
@@ -336,8 +259,8 @@ int main(int agrc, char *agrv[])
 
     // add css
     GtkCssProvider *css_provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(css_provider, "style.css", NULL);
-    css_set(css_provider, window);
+    gtk_css_provider_load_from_path(css_provider, "./pages/Auth/style.css", NULL);
+    css_set(window, css_provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), window);
@@ -353,6 +276,8 @@ int main(int agrc, char *agrv[])
 
     gtk_widget_show(window);
     gtk_builder_connect_signals(builder, NULL);
+    gtk_window_maximize(GTK_WINDOW(window));
+
     gtk_main();
 
     return EXIT_SUCCESS;

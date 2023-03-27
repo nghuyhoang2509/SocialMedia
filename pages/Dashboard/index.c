@@ -26,5 +26,6 @@ int dashboard()
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
+    gtk_main();
     return 0;
 }
