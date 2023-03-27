@@ -1,1 +1,1 @@
-int LOGINED = 0; // 0 is did not login 1 is logined
+int LOGINED = 1; // 0 is did not login 1 is logined

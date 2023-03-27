@@ -1,0 +1,1 @@
+void css_set(GtkWidget *g_widget, GtkCssProvider *provider);

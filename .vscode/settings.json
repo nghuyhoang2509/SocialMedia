@@ -9,6 +9,8 @@
         "libgen.h": "c",
         "unistd.h": "c",
         "math.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "cstdlib": "c",
+        "handle.h": "c"
     }
 }
