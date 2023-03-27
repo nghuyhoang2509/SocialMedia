@@ -41,3 +41,8 @@
 .box {
   background-color: #ffffff;
 }
+
+.btn_send_message {
+  color: black;
+  font-weight: 800;
+}

@@ -61,6 +61,8 @@
         </child>
         <child>
           <object class="GtkEntry" id="input_message">
+            <property name="width-request">100</property>
+            <property name="height-request">80</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="placeholder-text" translatable="yes">Type the message and enter to send</property>
@@ -72,6 +74,22 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_send_message">
+            <property name="label" translatable="yes">Send</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <style>
+              <class name="btn_send_message"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <style>
