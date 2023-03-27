@@ -47,7 +47,7 @@ static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, v
 
     return realsize;
 }
-int validate_email(char *email)
+static int validate_email(char *email)
 {
     char *pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
@@ -66,7 +66,7 @@ int validate_email(char *email)
     regfree(&regex);
 }
 
-void on_entry_insert_spacebar(GtkWidget *e)
+static void on_entry_insert_spacebar(GtkWidget *e)
 {
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(e));
     gint length = strlen(text);
@@ -80,7 +80,7 @@ void on_entry_insert_spacebar(GtkWidget *e)
         }
     }
 }
-void on_sign_in_btn_clicked(GtkWidget *e)
+static void on_sign_in_btn_clicked(GtkWidget *e)
 {
     // gchar *t = gtk_entry_get_text(email_sign_in);
     char *markup = "";
@@ -88,14 +88,14 @@ void on_sign_in_btn_clicked(GtkWidget *e)
     const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_in);
     if (strlen(email) == 0 || strlen(pass) == 0)
     {
-        markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Please, fill in all the information!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
         return;
     }
     else if (strlen(pass) < 8)
     {
-        markup = "<span foreground='#FF0000'>Password must be 8 characters or more!</span>";
-        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
+        markup = "<span size='large' foreground='#FF0000'>Password must be 8 characters or more!</span>";
+        gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
         return;
     }
     char data[1000];
@@ -107,7 +107,7 @@ void on_sign_in_btn_clicked(GtkWidget *e)
     if (root == NULL)
     {
         printf("Loi khi doc JSON\n");
-        markup = "<span foreground='#FF0000'>Something is wrong, please wait!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Something is wrong, please wait!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
     }
     else
@@ -144,12 +144,13 @@ void on_sign_in_btn_clicked(GtkWidget *e)
         if (error != NULL)
         {
             char error_status[1000];
-            sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
+            printf("have error");
+            sprintf(error_status, "<span size='large' foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(sign_in_check), error_status);
         }
         else
         {
-            markup = "<span foreground='#00FF00'>Sign in done</span>";
+            markup = "<span size='large' foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
             printf("Sign in done");
             LOGINED = 1;
@@ -158,7 +159,7 @@ void on_sign_in_btn_clicked(GtkWidget *e)
         }
     }
 }
-void on_sign_up_btn_clicked(GtkWidget *e)
+static void on_sign_up_btn_clicked(GtkWidget *e)
 {
     char *markup = "";
     const gpointer fullname = (const gpointer)gtk_entry_get_text(fullname_sign_up);
@@ -166,19 +167,19 @@ void on_sign_up_btn_clicked(GtkWidget *e)
     const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_up);
     if (strlen(fullname) == 0 || strlen(email) == 0 || strlen(pass) == 0)
     {
-        markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Please, fill in all the information!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
     else if (!validate_email(email))
     {
-        markup = "<span foreground='#FF0000'>Wrong email format!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Wrong email format!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
     else if (strlen(pass) < 8)
     {
-        markup = "<span foreground='#FF0000'>Password must be 8 characters or more!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Password must be 8 characters or more!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
         return;
     }
@@ -192,7 +193,7 @@ void on_sign_up_btn_clicked(GtkWidget *e)
     if (root == NULL)
     {
         printf("Loi khi doc JSON\n");
-        markup = "<span foreground='#FF0000'>Something is wrong, please wait!</span>";
+        markup = "<span size='large' foreground='#FF0000'>Something is wrong, please wait!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
     }
     else
@@ -210,28 +211,28 @@ void on_sign_up_btn_clicked(GtkWidget *e)
         if (error != NULL)
         {
             char error_status[1000];
-            sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
+            sprintf(error_status, "<span size='large' foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(sign_up_check), error_status);
         }
         else
         {
             char success_status[1000];
-            sprintf(success_status, "<span foreground='#00FF00'>%s</span>", success);
+            sprintf(success_status, "<span size='large' foreground='#00FF00'>%s</span>", success);
             gtk_label_set_markup(GTK_LABEL(sign_up_check), success_status);
         }
     }
 }
-void on_sign_up_now_btn_clicked(GtkWidget *e)
+static void on_sign_up_now_btn_clicked(GtkWidget *e)
 {
     gtk_widget_hide(sign_in_frame);
     gtk_widget_show(sign_up_frame);
 }
-void on_sign_in_now_btn_clicked(GtkWidget *e)
+static void on_sign_in_now_btn_clicked(GtkWidget *e)
 {
     gtk_widget_hide(sign_up_frame);
     gtk_widget_show(sign_in_frame);
 }
-void window_destroy(GtkWidget *w, gpointer window)
+static void window_destroy(GtkWidget *w, gpointer window)
 {
     gtk_widget_destroy(window);
 }

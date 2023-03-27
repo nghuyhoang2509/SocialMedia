@@ -1,8 +1,20 @@
+static GtkWidget *window;
+
+static int log_out_handle()
+{
+    LOGINED = 0;
+    USER.fullname = NULL;
+    USER.mail = NULL;
+    USER.id = NULL;
+    gtk_widget_destroy(window);
+    PROCESSINIT();
+}
+
 int dashboard()
 {
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Dashboard/Dashboard.glade");
 
-    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_page"));
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_page"));
     GtkWidget *label_name = GTK_WIDGET(gtk_builder_get_object(builder, "label_name"));
     GtkWidget *container_button = GTK_WIDGET(gtk_builder_get_object(builder, "container_button"));
     GtkWidget *discover = GTK_WIDGET(gtk_builder_get_object(builder, "discover"));
@@ -24,6 +36,7 @@ int dashboard()
     css_set(log_out, provider);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(log_out, "clicked", G_CALLBACK(log_out_handle), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();
