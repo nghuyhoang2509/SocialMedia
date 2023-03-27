@@ -11,6 +11,9 @@
         "math.h": "c",
         "string.h": "c",
         "cstdlib": "c",
-        "handle.h": "c"
+        "handle.h": "c",
+        "json.h": "c",
+        "regex.h": "c",
+        "tre.h": "c"
     }
 }

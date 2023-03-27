@@ -56,6 +56,8 @@
 				"-lintl",		
 				"-lcurl",
 				"-ljansson",		
+				"-ljson-c",
+				"-lregex",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
