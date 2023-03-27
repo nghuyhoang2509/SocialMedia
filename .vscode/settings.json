@@ -15,6 +15,7 @@
         "json.h": "c",
         "regex.h": "c",
         "tre.h": "c",
-        "curl.h": "c"
+        "curl.h": "c",
+        "call_api.h": "c"
     }
 }

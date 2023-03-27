@@ -1,12 +1,26 @@
+static void add_mail_to_list(const char *mail);
 
-static char data_mail[4][100] = {"nghuyhoang2509@gmail.com", "nhhhoctap@gmail.com", "crasmaverkgkg@gmail.com", "hoangnhse182096@fpt.edu.vn"};
+static GtkListBox *list_mail;
 
-int Everyone(int agrc, char *agrv[])
+static void add_mail_to_list(const char *mail)
+{
+    GtkWidget *label = gtk_label_new(mail);
+    GtkWidget *row = gtk_list_box_row_new();
+    GtkStyleContext *context = gtk_widget_get_style_context(row);
+    gtk_style_context_add_class(context, "container_item");
+
+    gtk_container_add(GTK_CONTAINER(row), label);
+    gtk_list_box_insert(list_mail, row, -1);
+}
+
+int Everyone()
 {
     char data[2];
     sprintf(data, "{}");
     char *response = request("everyone", data);
-    printf("%s", response);
+    json_object *root = json_tokener_parse(response);
+    json_object *mail_obj = json_object_object_get(root, "mail");
+    int mail_array_len = json_object_array_length(mail_obj);
 
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Everyone/Everyone.glade");
 
@@ -18,23 +32,20 @@ int Everyone(int agrc, char *agrv[])
     GtkWidget *label_name = GTK_WIDGET(gtk_builder_get_object(builder, "label_name"));
     GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
 
-    GtkListBox *list_mail = GTK_LIST_BOX(list_box);
-    for (int i = 0; i <= 4; i++)
+    list_mail = GTK_LIST_BOX(list_box);
+    for (int i = 0; i < mail_array_len; i++)
     {
-        GtkWidget *label = gtk_label_new(data_mail[i]);
-        GtkWidget *row = gtk_list_box_row_new();
-        GtkStyleContext *context = gtk_widget_get_style_context(row);
-        gtk_style_context_add_class(context, "container_item");
-
-        gtk_container_add(GTK_CONTAINER(row), label);
-        gtk_list_box_insert(list_mail, row, -1);
+        json_object *mail_value = json_object_array_get_idx(mail_obj, i);
+        add_mail_to_list(json_object_get_string(mail_value));
     }
+    json_object_put(root);
+
     gtk_container_foreach(GTK_CONTAINER(list_box), (GtkCallback)css_set, provider);
 
     css_set(label_name, provider);
     css_set(window, provider);
 
-    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(window, "destroy", G_CALLBACK(PROCESSINIT), NULL);
     gtk_widget_show_all(window);
 
     gtk_main();

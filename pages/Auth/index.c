@@ -22,31 +22,6 @@ static const char *FULLNAME;
 static const char *EMAIL;
 static const char *ID;
 
-struct memory_struct
-{
-    char *memory;
-    size_t size;
-};
-static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-    size_t realsize = size * nmemb;
-    struct memory_struct *mem = (struct memory_struct *)userp;
-
-    char *ptr = realloc(mem->memory, mem->size + realsize + 1);
-    if (!ptr)
-    {
-        /* out of memory! */
-        printf("not enough memory (realloc returned NULL)\n");
-        return 0;
-    }
-
-    mem->memory = ptr;
-    memcpy(&(mem->memory[mem->size]), contents, realsize);
-    mem->size += realsize;
-    mem->memory[mem->size] = 0;
-
-    return realsize;
-}
 static int validate_email(char *email)
 {
     char *pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";

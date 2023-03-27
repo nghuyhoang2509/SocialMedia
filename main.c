@@ -8,9 +8,11 @@
 #include <math.h>
 #include <stddef.h>
 #include <json-c/json.h>
+#include <json-c/arraylist.h>
 #include <regex.h>
 #include <curl/curl.h>
 
+#include "call_API.c"
 #include "handle.h"
 #include "env.c"
 #include "pages/index.c"

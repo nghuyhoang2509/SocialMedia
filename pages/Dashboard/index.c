@@ -10,7 +10,15 @@ static int log_out_handle()
     PROCESSINIT();
 }
 
-int dashboard()
+static int everyone_handle()
+{
+
+    gtk_widget_destroy(window);
+    printf("Please waiting");
+    Everyone();
+}
+
+int Dashboard()
 {
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Dashboard/Dashboard.glade");
 
@@ -37,7 +45,7 @@ int dashboard()
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(log_out, "clicked", G_CALLBACK(log_out_handle), NULL);
-    g_signal_connect(everyone, "clicked", G_CALLBACK(Everyone), NULL);
+    g_signal_connect(everyone, "clicked", G_CALLBACK(everyone_handle), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();

@@ -55,7 +55,6 @@
 				"-lglib-2.0",
 				"-lintl",		
 				"-lcurl",
-				"-ljansson",		
 				"-ljson-c",
 				"-lregex",
 				"-o",
