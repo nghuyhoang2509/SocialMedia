@@ -3,6 +3,8 @@
         "sdl.h": "c",
         "stdio.h": "c",
         "gtk.h": "c",
-        "json.h": "c"
+        "json.h": "c",
+        "regex.h": "c",
+        "tre.h": "c"
     }
 }
