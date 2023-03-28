@@ -21,7 +21,6 @@
 int main(int agrc, char *agrv[])
 {
     gtk_init(&agrc, &agrv);
-
     PROCESSINIT();
 
     return EXIT_SUCCESS;

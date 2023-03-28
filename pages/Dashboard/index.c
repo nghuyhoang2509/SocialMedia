@@ -6,16 +6,25 @@ static int log_out_handle()
     USER.fullname = NULL;
     USER.mail = NULL;
     USER.id = NULL;
+    gtk_main_quit();
     gtk_widget_destroy(window);
     PROCESSINIT();
 }
 
 static int everyone_handle()
 {
-
+    gtk_main_quit();
     gtk_widget_destroy(window);
     printf("Please waiting");
     Everyone();
+}
+
+static int discover_handle()
+{
+    gtk_main_quit();
+    gtk_widget_destroy(window);
+    printf("Please waiting");
+    Discover();
 }
 
 int Dashboard()
@@ -35,17 +44,12 @@ int Dashboard()
     gtk_css_provider_load_from_path(provider, "./pages/Dashboard/style.css", NULL);
 
     css_set(window, provider);
-    css_set(label_name, provider);
-    css_set(container_button, provider);
-    css_set(discover, provider);
-    css_set(personal, provider);
-    css_set(edit_infor, provider);
-    css_set(everyone, provider);
-    css_set(log_out, provider);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(log_out, "clicked", G_CALLBACK(log_out_handle), NULL);
     g_signal_connect(everyone, "clicked", G_CALLBACK(everyone_handle), NULL);
+    g_signal_connect(discover, "clicked", G_CALLBACK(discover_handle), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();

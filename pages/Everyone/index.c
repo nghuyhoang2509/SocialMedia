@@ -40,12 +40,10 @@ int Everyone()
     }
     json_object_put(root);
 
-    gtk_container_foreach(GTK_CONTAINER(list_box), (GtkCallback)css_set, provider);
-
-    css_set(label_name, provider);
     css_set(window, provider);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-    g_signal_connect(window, "destroy", G_CALLBACK(PROCESSINIT), NULL);
+    g_signal_connect(window, "destroy", G_CALLBACK(come_back), NULL);
     gtk_widget_show_all(window);
 
     gtk_main();
