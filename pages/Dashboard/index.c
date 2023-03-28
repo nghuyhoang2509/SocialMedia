@@ -32,8 +32,7 @@ int Dashboard()
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Dashboard/Dashboard.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "dashboard_page"));
-    GtkWidget *label_name = GTK_WIDGET(gtk_builder_get_object(builder, "label_name"));
-    GtkWidget *container_button = GTK_WIDGET(gtk_builder_get_object(builder, "container_button"));
+
     GtkWidget *discover = GTK_WIDGET(gtk_builder_get_object(builder, "discover"));
     GtkWidget *personal = GTK_WIDGET(gtk_builder_get_object(builder, "personal"));
     GtkWidget *edit_infor = GTK_WIDGET(gtk_builder_get_object(builder, "edit_infor"));

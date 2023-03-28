@@ -43,7 +43,6 @@ int Discover()
     GtkCssProvider *provider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(provider, "./pages/Discover/style.css", NULL);
 
-    GtkWidget *label_name = GTK_WIDGET(gtk_builder_get_object(builder, "label_name"));
     GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
 
     list_post = GTK_LIST_BOX(list_box);
