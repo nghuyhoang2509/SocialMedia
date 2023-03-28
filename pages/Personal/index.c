@@ -44,6 +44,10 @@ int main(int agrc, char *agrv[]){
     profile = GTK_WIDGET(gtk_builder_get_object(builder, "profile"));
 
     g_signal_connect(window,"destroy", G_CALLBACK(gtk_main_quit),NULL);
+    g_signal_connect(create_a_post_button,"clicked", G_CALLBACK(create_a_post_button_click),NULL);
+    g_signal_connect(cancel_button,"clicked", G_CALLBACK(cancel_button_click),NULL);
+    
+
 
     gtk_builder_connect_signals(builder,NULL);
     gtk_widget_show(window);
