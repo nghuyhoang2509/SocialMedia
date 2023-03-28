@@ -1,33 +1,33 @@
-.green_bg {
+.green_bg{
   background: #4ad97c;
   color: #f2f2f2;
-  font-family: "Open Sans";
-  font-weight: 800;
-  font-size: 20px;
+  font-weight: bold;
+}
+.white_bg{
+  background: #f6f5f4;
 }
 .shadow {
   box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
 }
-.green_layout {
-  background: #f2f2f2;
-  color: darkgray;
-}
-.green_button {
-  background: #4ad97c;
-  color: #f2f2f2;
-  font-family: "Open Sans";
+
+.text{
   font-weight: bold;
 }
-
-.layout {
-  padding: 0px 20px;
+.round_corner{
+  border-radius: 13px;
+  border-style: none;
+}
+.green_text{
+  color: #4ad97c;
+  font-weight: bold;
+}
+#edit_label{
+  font-size:x-large;
+  border-radius: 13px 13px 0px 0px;
 }
 
-.btn {
-  border-radius: 15px;
-  margin: 0px 30px;
+#edit_check{
+  font-size: smaller;
 }
 
-.box {
-  border-radius: 20px;
-}
+
