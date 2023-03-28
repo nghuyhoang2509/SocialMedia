@@ -89,7 +89,7 @@ void on_sign_in_btn_clicked(GtkWidget *e)
     else if (strlen(pass) < 8)
     {
         markup = "<span foreground='#FF0000'>Password must be 8 characters or more!</span>";
-        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
+        gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
         return;
     }
     char data[1000];
@@ -181,7 +181,7 @@ void on_sign_up_btn_clicked(GtkWidget *e)
     {
         printf("Loi khi doc JSON\n");
         markup = "<span foreground='#FF0000'>Something is wrong, please wait!</span>";
-        gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
+        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
     }
     else
     {
