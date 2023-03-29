@@ -2,9 +2,12 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <!-- interface-css-provider-path style.css -->
   <object class="GtkWindow" id="personal">
     <property name="name">personal</property>
     <property name="can-focus">False</property>
+    <property name="default-width">600</property>
+    <property name="default-height">800</property>
     <child>
       <object class="GtkOverlay">
         <property name="visible">True</property>
@@ -64,10 +67,14 @@
                       <object class="GtkListBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="selection-mode">none</property>
+                        <property name="activate-on-single-click">False</property>
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
@@ -276,7 +283,7 @@ https://fcodehcm.wordpress.com
                               </object>
                             </child>
                             <style>
-                              <class name="background"/>
+                              <class name="post"/>
                             </style>
                           </object>
                         </child>
@@ -501,7 +508,7 @@ https://fcodehcm.wordpress.com
                               </object>
                             </child>
                             <style>
-                              <class name="background"/>
+                              <class name="post"/>
                             </style>
                           </object>
                         </child>
@@ -723,7 +730,7 @@ https://fcodehcm.wordpress.com
                               </object>
                             </child>
                             <style>
-                              <class name="background"/>
+                              <class name="post"/>
                             </style>
                           </object>
                         </child>
@@ -945,10 +952,13 @@ https://fcodehcm.wordpress.com
                               </object>
                             </child>
                             <style>
-                              <class name="background"/>
+                              <class name="post"/>
                             </style>
                           </object>
                         </child>
+                        <style>
+                          <class name="list_box"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1122,5 +1132,8 @@ Thông tin chi tiết
         </child>
       </object>
     </child>
+    <style>
+      <class name="window"/>
+    </style>
   </object>
 </interface>

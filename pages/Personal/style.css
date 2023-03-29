@@ -1,32 +1,40 @@
-.cancel{
-    color: #F2BC1B;
-    font-weight: 900;
+.cancel {
+  color: #f2bc1b;
+  font-weight: 900;
 }
-.post{
-    color: #4AD97C;
-    font-weight: 900;
+
+.h1 {
+  color: white;
+  font-weight: 900;
+  font-size: 28px;
+  font-style: normal;
+  background-color: #4ad97c;
 }
-.h1{
-   color: white;
-   font-family: 'Klavia', Times, serif;
-   font-weight: 900;
-   font-size: 28px;
-   font-style: normal;
-   background-color: #4AD97C ;
+.body {
+  color: black;
+  background-color: white;
+  padding: 20px 10px;
+  margin: 20px 0px;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px black;
 }
-.body{
-    background-color: white;
-    color: black;
+.window {
+  background-image: url("https://f-code.tech/static/media/background.5d17ffe36988d38fdec1.png");
 }
-.background{
-    background-image: url("https://f-code.tech/static/media/background.5d17ffe36988d38fdec1.png") ;
+.gtk_create {
+  color: #4ad97c;
+  font-weight: 900;
 }
-.gtk_create{
-    color: #4AD97C;
-    font-weight: 900;
+.h2 {
+  color: #f2bc1b;
+  font-size: 18px;
+  font-weight: 900;
 }
-.h2{
-    color: #F2BC1B;
-    font-size: 18px;
-    font-weight: 900;
+
+.list_box {
+  background-color: transparent;
+}
+
+.post {
+  padding: 10px 15px;
 }
