@@ -169,7 +169,7 @@ static void on_sign_up_btn_clicked(GtkWidget *e)
     {
         printf("Loi khi doc JSON\n");
         markup = "<span size='large' foreground='#FF0000'>Something is wrong, please wait!</span>";
-        gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
+        gtk_label_set_markup(GTK_LABEL(sign_up_check), markup);
     }
     else
     {
