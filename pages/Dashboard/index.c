@@ -13,16 +13,12 @@ static int log_out_handle()
 
 static int everyone_handle()
 {
-    gtk_main_quit();
-    gtk_widget_destroy(window);
     printf("Please waiting");
     Everyone();
 }
 
 static int discover_handle()
 {
-    gtk_main_quit();
-    gtk_widget_destroy(window);
     printf("Please waiting");
     Discover();
 }

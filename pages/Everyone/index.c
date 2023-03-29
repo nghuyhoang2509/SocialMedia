@@ -43,7 +43,7 @@ int Everyone()
     css_set(window, provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-    g_signal_connect(window, "destroy", G_CALLBACK(come_back), NULL);
+    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_widget_show_all(window);
 
     gtk_main();
