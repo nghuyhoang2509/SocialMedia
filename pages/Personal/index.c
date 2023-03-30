@@ -19,14 +19,10 @@ GtkWidget *create_a_post;
 
 void create_a_post_button_click()
 {
-    gtk_widget_hide(profile);
-    gtk_widget_show(create_a_post);
 }
 
 void cancel_button_click()
 {
-    gtk_widget_hide(create_a_post);
-    gtk_widget_show(profile);
 }
 
 int main(int agrc, char *agrv[])
@@ -37,8 +33,6 @@ int main(int agrc, char *agrv[])
     builder = gtk_builder_new_from_file("Personal.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "personal"));
-
-    create_a_post_button = GTK_WIDGET(gtk_builder_get_object(builder, "create_a_post_button"));
 
     cancel_button = GTK_WIDGET(gtk_builder_get_object(builder, "cancel_button"));
 

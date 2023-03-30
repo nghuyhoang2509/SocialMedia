@@ -7,7 +7,7 @@
     <property name="name">personal</property>
     <property name="can-focus">False</property>
     <property name="default-width">600</property>
-    <property name="default-height">800</property>
+    <property name="default-height">600</property>
     <child>
       <object class="GtkOverlay">
         <property name="visible">True</property>
@@ -75,6 +75,8 @@
                             <property name="can-focus">True</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
+                            <property name="activatable">False</property>
+                            <property name="selectable">False</property>
                             <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
@@ -282,117 +284,40 @@ https://fcodehcm.wordpress.com
                                 </style>
                               </object>
                             </child>
+                            <style>
+                              <class name="post"/>
+                            </style>
                           </object>
                         </child>
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="activatable">False</property>
+                            <property name="selectable">False</property>
                             <child>
-                              <object class="GtkListBoxRow">
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
-                                <property name="can-focus">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="orientation">vertical</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">center</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="halign">center</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">userf18@gmail.com</property>
-                                            <style>
-                                              <class name="h2"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="orientation">vertical</property>
-                                            <child>
-                                              <object class="GtkExpander">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <child>
-                                                  <object class="GtkMenuButton">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="focus-on-click">False</property>
-                                                    <property name="receives-default">True</property>
-                                                    <child>
-                                                      <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">False</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Edit</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">5</property>
-                                                            <property name="position">1</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Delete</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">2</property>
-                                                            <property name="position">9</property>
-                                                          </packing>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                                <child type="label">
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="label" translatable="yes">Setting</property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="label" translatable="yes">userf18@gmail.com</property>
+                                        <style>
+                                          <class name="h2"/>
+                                        </style>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -401,12 +326,92 @@ https://fcodehcm.wordpress.com
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel">
+                                      <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkExpander">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">True</property>
+                                            <child>
+                                              <object class="GtkMenuButton">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">True</property>
+                                                <property name="focus-on-click">False</property>
+                                                <property name="receives-default">True</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">False</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <child>
+                                                      <object class="GtkButton">
+                                                        <property name="label" translatable="yes">Edit</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="receives-default">True</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">False</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="padding">5</property>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkButton">
+                                                        <property name="label" translatable="yes">Delete</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="receives-default">True</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">False</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="padding">2</property>
+                                                        <property name="position">9</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
+                                            <child type="label">
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">False</property>
+                                                <property name="label" translatable="yes">Setting</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
 ----------------------------------------------------------------------
 Xin chào mọi người đã quay lại nhịp sống sau Tết, chúng ta sẽ cùng F-Code khởi động hoạt động học thuật mở màn đầu tiên trong chuỗi các hoạt động thú vị sắp tới: TECHAWAY
 Giới thiệu đây là một hoạt động học thuật với mục đích tạo sân chơi cho các bạn tham gia cùng chia sẻ những kiến thức xung quanh thế giới công nghệ và lập trình. Đây sẽ là cơ hội để các bạn tham gia cùng viết lên những câu chuyện được đúc kết từ góc nhìn trải nghiệm và học tập của các bạn, đồng thời còn giúp bạn có thể tự rèn luyện khả năng tổng hợp kiến thức thông qua việc viết bài chia sẻ cho cộng đồng.
@@ -482,136 +487,57 @@ Mọi thắc mắc xin liên hệ : Nguyễn Gia Linh (Nguyen Lin)
 📖 𝐅-𝐂𝐨𝐝𝐞 𝐁𝐥𝐨𝐠 - Nơi mà các thành viên CLB chia sẻ kiến thức thông qua các bài viết.
 https://fcodehcm.wordpress.com
 📧 𝐄𝐦𝐚𝐢𝐥: 𝑓𝑐𝑜𝑑𝑒.𝑓𝑝𝑡𝑢ℎ𝑐𝑚@𝑔𝑚𝑎𝑖𝑙.𝑐𝑜𝑚</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">60</property>
-                                        <style>
-                                          <class name="body"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
+                                    <property name="wrap">True</property>
+                                    <property name="max-width-chars">60</property>
                                     <style>
-                                      <class name="h2"/>
+                                      <class name="body"/>
                                     </style>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                                 <style>
-                                  <class name="background"/>
+                                  <class name="h2"/>
                                 </style>
                               </object>
                             </child>
+                            <style>
+                              <class name="post"/>
+                            </style>
                           </object>
                         </child>
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="activatable">False</property>
+                            <property name="selectable">False</property>
                             <child>
-                              <object class="GtkListBoxRow">
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
-                                <property name="can-focus">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="orientation">vertical</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">center</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="halign">center</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">userf18@gmail.com</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="orientation">vertical</property>
-                                            <child>
-                                              <object class="GtkExpander">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <child>
-                                                  <object class="GtkMenuButton">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="focus-on-click">False</property>
-                                                    <property name="receives-default">True</property>
-                                                    <child>
-                                                      <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">False</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Edit</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">5</property>
-                                                            <property name="position">1</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Delete</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">2</property>
-                                                            <property name="position">9</property>
-                                                          </packing>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                                <child type="label">
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="label" translatable="yes">Setting</property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="label" translatable="yes">userf18@gmail.com</property>
+                                        <style>
+                                          <class name="h2"/>
+                                        </style>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -620,12 +546,92 @@ https://fcodehcm.wordpress.com
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel">
+                                      <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkExpander">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">True</property>
+                                            <child>
+                                              <object class="GtkMenuButton">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">True</property>
+                                                <property name="focus-on-click">False</property>
+                                                <property name="receives-default">True</property>
+                                                <child>
+                                                  <object class="GtkBox">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">False</property>
+                                                    <property name="orientation">vertical</property>
+                                                    <child>
+                                                      <object class="GtkButton">
+                                                        <property name="label" translatable="yes">Edit</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="receives-default">True</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">False</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="padding">5</property>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkButton">
+                                                        <property name="label" translatable="yes">Delete</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="receives-default">True</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">False</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="padding">2</property>
+                                                        <property name="position">9</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                              </object>
+                                            </child>
+                                            <child type="label">
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">False</property>
+                                                <property name="label" translatable="yes">Setting</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
 ----------------------------------------------------------------------
 Xin chào mọi người đã quay lại nhịp sống sau Tết, chúng ta sẽ cùng F-Code khởi động hoạt động học thuật mở màn đầu tiên trong chuỗi các hoạt động thú vị sắp tới: TECHAWAY
 Giới thiệu đây là một hoạt động học thuật với mục đích tạo sân chơi cho các bạn tham gia cùng chia sẻ những kiến thức xung quanh thế giới công nghệ và lập trình. Đây sẽ là cơ hội để các bạn tham gia cùng viết lên những câu chuyện được đúc kết từ góc nhìn trải nghiệm và học tập của các bạn, đồng thời còn giúp bạn có thể tự rèn luyện khả năng tổng hợp kiến thức thông qua việc viết bài chia sẻ cho cộng đồng.
@@ -701,247 +707,26 @@ Mọi thắc mắc xin liên hệ : Nguyễn Gia Linh (Nguyen Lin)
 📖 𝐅-𝐂𝐨𝐝𝐞 𝐁𝐥𝐨𝐠 - Nơi mà các thành viên CLB chia sẻ kiến thức thông qua các bài viết.
 https://fcodehcm.wordpress.com
 📧 𝐄𝐦𝐚𝐢𝐥: 𝑓𝑐𝑜𝑑𝑒.𝑓𝑝𝑡𝑢ℎ𝑐𝑚@𝑔𝑚𝑎𝑖𝑙.𝑐𝑜𝑚</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">60</property>
-                                        <style>
-                                          <class name="body"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
+                                    <property name="wrap">True</property>
+                                    <property name="max-width-chars">60</property>
                                     <style>
-                                      <class name="h2"/>
+                                      <class name="body"/>
                                     </style>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                                 <style>
-                                  <class name="background"/>
+                                  <class name="h2"/>
                                 </style>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkListBoxRow">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <child>
-                              <object class="GtkListBoxRow">
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can-focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="halign">center</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">userf18@gmail.com</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="orientation">vertical</property>
-                                            <child>
-                                              <object class="GtkExpander">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <child>
-                                                  <object class="GtkMenuButton">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="focus-on-click">False</property>
-                                                    <property name="receives-default">True</property>
-                                                    <child>
-                                                      <object class="GtkBox">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">False</property>
-                                                        <property name="orientation">vertical</property>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Edit</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">5</property>
-                                                            <property name="position">1</property>
-                                                          </packing>
-                                                        </child>
-                                                        <child>
-                                                          <object class="GtkButton">
-                                                            <property name="label" translatable="yes">Delete</property>
-                                                            <property name="visible">True</property>
-                                                            <property name="can-focus">True</property>
-                                                            <property name="receives-default">True</property>
-                                                          </object>
-                                                          <packing>
-                                                            <property name="expand">False</property>
-                                                            <property name="fill">True</property>
-                                                            <property name="padding">2</property>
-                                                            <property name="position">9</property>
-                                                          </packing>
-                                                        </child>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                                <child type="label">
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="label" translatable="yes">Setting</property>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can-focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <property name="label" translatable="yes">TECHAWAY 2023 - SEASON 3 - CHAPTER 1🔥
-----------------------------------------------------------------------
-Xin chào mọi người đã quay lại nhịp sống sau Tết, chúng ta sẽ cùng F-Code khởi động hoạt động học thuật mở màn đầu tiên trong chuỗi các hoạt động thú vị sắp tới: TECHAWAY
-Giới thiệu đây là một hoạt động học thuật với mục đích tạo sân chơi cho các bạn tham gia cùng chia sẻ những kiến thức xung quanh thế giới công nghệ và lập trình. Đây sẽ là cơ hội để các bạn tham gia cùng viết lên những câu chuyện được đúc kết từ góc nhìn trải nghiệm và học tập của các bạn, đồng thời còn giúp bạn có thể tự rèn luyện khả năng tổng hợp kiến thức thông qua việc viết bài chia sẻ cho cộng đồng.
-1. CHỦ ĐỀ SHARING
-🔹Giới thiệu và hướng dẫn sử dụng các Tips, Keys, công cụ, phần mềm giúp code hiệu quả và nhanh hơn.
-🔹Chia sẻ về framework, các lệnh, thư viện đặc biệt hỗ trợ code.
-🔹Hướng dẫn cách code một chức năng bất kỳ hoặc chia sẻ kiến thức lập trình.
-🔹Chia sẻ kinh nghiệm hay kĩ năng cần có cho một lập trình viên, chẳng hạn như cách cách thực hiện một project, lộ trình học code hiệu quả và hay các kiến thức thú vị thuộc lĩnh vực công nghệ thông tin.
-2. THỜI GIAN
-⌛Hạn chót điền form đăng ký: 11:59 pm - 10.02.2022
-📝 Link đăng kí: TechAway - Code the Dream (Nhóm 2 người chỉ cần Leader điền form)(Nhóm 2 người chỉ cần Leader điền form)
-Vòng 1: Nộp bài về cho ban tổ chức: 11.02.2023 - 10.03.2023
-Vòng 2: Bình chọn trên fanpage: 13.03.2023 - 30.04.2023
-Công bố điểm: 17.05.2023
-3. ĐỐI TƯỢNG THAM GIA
-👤 Thành viên F-Code
-‼️ Đối với thành viên mới F-18 bắt buộc tham gia.
-4. HÌNH THỨC THAM GIA
-▫️ Nhóm 2 người hoặc làm cá nhân (khuyến khích làm theo nhóm 2 người).
-▫️ Đăng ký tham gia tại link kèm theo bài viết. Đối với nhóm 2 người chỉ cần leader điền form đăng ký và nộp bài về cho ban tổ chức.
-▫️ Các bạn có thể nhờ sự trợ giúp từ các anh chị/ bạn bè/ thầy cô để lên ý tưởng cho bài viết hoặc viết theo chủ đề tự chọn.
-5. CÁCH THỨC NỘP BÀI VÀ CÁC VÒNG THI
-Nộp bài :
-▫️ Nộp bài sharing dưới dạng file .doc /.pdf /.ppt, link doc/drive tạo bằng email cá nhân tới địa chỉ
-email : fcode.techaway@gmail.com
-▫️ Nộp bài thi bằng email cá nhân (Không dùng mail FPT)
-▫️ Email nộp bài phải có nội dung nghiêm túc, lịch sự.
-▫️ Cú pháp đặt tên bài và chủ đề mail: [Techaway - Họ và Tên - MSSV] tên bài Sharing
-(VD: [Techaway - Nguyễn Văn A - SE123456] Tomcat).
-Các vòng thi :
-🎯 Vòng 1: Vòng kiểm duyệt
-Bài viết sẽ được ban học thuật kiểm duyệt nội dung, chấm điểm chuyên môn và đưa ra nhận xét bởi leader các crew.
-🎯 Vòng 2: Vòng bình chọn
-- Top 8 bài đăng thông qua vòng kiểm duyệt sẽ được đăng tại group private của CLB để tiến hành bình chọn lần 1.
--Top 4 bài có lượt bình chọn lần 1 cao nhất sẽ được đăng lên Fanpage chính thức của CLB để bắt đầu bình chọn ra Top 2 bài sharing được yêu thích nhất.
-6. YÊU CẦU BÀI VIẾT
-Không sai chính tả
-Nội dung bài viết phải liên quan đến học thuật hoặc chia sẻ kiến thức về lập trình
-Bài viết có chủ đề rõ ràng, nội dung có chiều sâu
-Không được viết và truyền bá nội dung sai lệch
-Không copy toàn bộ nội dung từ trên mạng
-Có trích dẫn các nguồn tham khảo
-Cú pháp đặt tên bài và chủ đề mail: [Techaway - Họ và Tên - MSSV] tên bài Sharing
-Nộp đúng định dạng file, nếu sử dụng link doc/ drive thì tạo link bằng email cá nhân
-(VD: [Techaway - Nguyễn Văn A - SE123456] Tomcat)
-7. BỐ CỤC BÀI VIẾT THAM KHẢO
-🔹Mở bài: Giới thiệu và dẫn dắt nội dung
-🔹Thân bài:
--Các kiến thức, khái niệm cơ bản
--Nội dung chuyên sâu
--Kiến thức mở rộng (nếu có)
--Liên hệ thực tế
--Demo (nếu có)
-🔹Kết thúc: tóm tắt lại ý chính bài viết cần nắm
-8. CÁCH THỨC TÍNH ĐIỂM
-Khuyến khích sáng tạo: tạo demo, quay video hướng dẫn, …. (+5 điểm)
-Điểm bình chọn trên fanpage:
-1 like = +1 điểm
-1 tim = +3 điểm
-1 share = +3 điểm
-Các reaction khác = +2 điểm (trừ phẫn nộ)
-9. GIẢI THƯỞNG
-Nhằm thúc đẩy tinh thần tham gia của mọi người thì CLB đã chuẩn bị rất nhiều phần quà hấp dẫn với tổng giá trị trên dưới 10.000.000 VND
-🥇 Giải nhất: 300.000 VNĐ tiền mặt
-🥈 Giải nhì: 250.000 VNĐ tiền mặt
-🥉 2 Giải khuyến khích: Tổng giải thưởng 100.000VNĐ tiền mặt chia đôi
-💛 Hi vọng mọi người sẽ hưởng ứng tham gia tích cực cùng chia sẻ kiến thức bổ ích đến cho nhiều người
-📝 Link đăng kí: TechAway - Code the Dream (Nhóm 2 người chỉ cần Leader điền form)
-—————————————————————
-Mọi thắc mắc xin liên hệ : Nguyễn Gia Linh (Nguyen Lin)
-𝑭-𝑪𝒐𝒅𝒆 - 𝐶𝑜𝑑𝑒 𝑇ℎ𝑒 𝐷𝑟𝑒𝑎𝑚 - 𝐴𝑐𝑎𝑑𝑒𝑚𝑖𝑐 𝐶𝑙𝑢𝑏 𝑓𝑜𝑟 𝐿𝑒𝑎𝑟𝑛𝑖𝑛𝑔 𝑎𝑛𝑑 𝑆ℎ𝑎𝑟𝑖𝑛𝑔 𝐼𝑇 𝐾𝑛𝑜𝑤𝑙𝑒𝑑𝑔𝑒
-📝 𝐓𝐞𝐜𝐡𝐚𝐰𝐚𝐲 - Chuỗi bài viết học thuật để chia sẻ kiến thức của các thành viên CLB F-Code.
-📖 𝐅-𝐂𝐨𝐝𝐞 𝐁𝐥𝐨𝐠 - Nơi mà các thành viên CLB chia sẻ kiến thức thông qua các bài viết.
-https://fcodehcm.wordpress.com
-📧 𝐄𝐦𝐚𝐢𝐥: 𝑓𝑐𝑜𝑑𝑒.𝑓𝑝𝑡𝑢ℎ𝑐𝑚@𝑔𝑚𝑎𝑖𝑙.𝑐𝑜𝑚</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">60</property>
-                                        <style>
-                                          <class name="body"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <style>
-                                      <class name="h2"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="background"/>
-                                </style>
-                              </object>
-                            </child>
+                            <style>
+                              <class name="post"/>
+                            </style>
                           </object>
                         </child>
                         <style>
@@ -962,161 +747,6 @@ https://fcodehcm.wordpress.com
           <packing>
             <property name="index">-1</property>
           </packing>
-        </child>
-        <child type="overlay">
-          <object class="GtkScrolledWindow" id="create_a_post">
-            <property name="name">create_a_post</property>
-            <property name="can-focus">True</property>
-            <property name="shadow-type">in</property>
-            <child>
-              <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="label" translatable="yes">Creat a post
-</property>
-                        <style>
-                          <class name="h1"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <property name="margin-top">1</property>
-                            <property name="label" translatable="yes"> Nhân dịp “Quốc tế phụ nữ 8/3” - Ngày của những đóa hoa,CLB F-code muốn gửi tới các bạn nữ, những “đóa hoa” đích thực của CLB thật nhiều sức khỏe, ngày càng xinh đẹp và thành công không chỉ một ngày mà còn 365 ngày còn lại. Mong rằng các bạn, các chị, các em sẽ luôn giữ cho mình một ngọn lửa rực cháy để tỏa sáng không chỉ tại CLB mà còn trên mọi con đường mà các bạn đang đi.
-🌹 Cũng cho chính sự kiện trên, bạn Trần Khôi cũng mong muốn đem đến cho tất cả các bạn một món quà tinh thần hết sức tuyệt vời qua workshop dưới đây nhé !
-🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻
-[SHAREETING] AGILE and SCRUM - Make teamwork effective.
-Giới thiệu: Agile là mô hình xây dựng và phát triển phần mềm, một phương pháp để phát triển phần mềm linh hoạt nhằm đưa sản phẩm đến tay người dùng càng nhanh càng tốt càng sớm càng tốt. Trong đó vai trò của Scrum là vẽ ra quy trình “hiện thực hóa” những giá trị và nguyên tắc của Agile.
-Để hiểu rõ hơn về mô hình Agile cũng như tính ứng dụng của nó đối với một lập trình viên. F-Code sẽ tổ chức buổi workshop nho nhỏ vào tuần này.
-Một món ý nghĩa dành tặng cho tất cả các bạn thành viên. Hi vọng mọi người sẽ đến tham gia buổi workshop nhé !
-Thông tin chi tiết
--------------------------------------------
-👉 Người thực hiện: Trần Minh Khôi.
-👉 Đối tượng thích hợp: Những bạn muốn tìm hiểu cách làm việc nhóm một cách hiệu quả đặc biệt là tân thành viên đang thực hiện project.
-⏰ Thời gian: 18:00, thứ 6 ngày 10/03/2023.
-🏤 Địa điểm: Cập nhật sau.
- Nhân dịp “Quốc tế phụ nữ 8/3” - Ngày của những đóa hoa,CLB F-code muốn gửi tới các bạn nữ, những “đóa hoa” đích thực của CLB thật nhiều sức khỏe, ngày càng xinh đẹp và thành công không chỉ một ngày mà còn 365 ngày còn lại. Mong rằng các bạn, các chị, các em sẽ luôn giữ cho mình một ngọn lửa rực cháy để tỏa sáng không chỉ tại CLB mà còn trên mọi con đường mà các bạn đang đi.
-🌹 Cũng cho chính sự kiện trên, bạn Trần Khôi cũng mong muốn đem đến cho tất cả các bạn một món quà tinh thần hết sức tuyệt vời qua workshop dưới đây nhé !
-🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻🌻
-[SHAREETING] AGILE and SCRUM - Make teamwork effective.
-Giới thiệu: Agile là mô hình xây dựng và phát triển phần mềm, một phương pháp để phát triển phần mềm linh hoạt nhằm đưa sản phẩm đến tay người dùng càng nhanh càng tốt càng sớm càng tốt. Trong đó vai trò của Scrum là vẽ ra quy trình “hiện thực hóa” những giá trị và nguyên tắc của Agile.
-Để hiểu rõ hơn về mô hình Agile cũng như tính ứng dụng của nó đối với một lập trình viên. F-Code sẽ tổ chức buổi workshop nho nhỏ vào tuần này.
-Một món ý nghĩa dành tặng cho tất cả các bạn thành viên. Hi vọng mọi người sẽ đến tham gia buổi workshop nhé !
-Thông tin chi tiết
--------------------------------------------
-👉 Người thực hiện: Trần Minh Khôi.
-👉 Đối tượng thích hợp: Những bạn muốn tìm hiểu cách làm việc nhóm một cách hiệu quả đặc biệt là tân thành viên đang thực hiện project.
-⏰ Thời gian: 18:00, thứ 6 ngày 10/03/2023.
-🏤 Địa điểm: Cập nhật sau.</property>
-                            <property name="wrap">True</property>
-                            <property name="max-width-chars">60</property>
-                            <style>
-                              <class name="body"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <style>
-                          <class name="background"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkListBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <child>
-                          <object class="GtkListBoxRow">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <child>
-                              <object class="GtkButton" id="post">
-                                <property name="label" translatable="yes">Post</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
-                                <property name="valign">center</property>
-                                <property name="margin-left">200</property>
-                                <property name="margin-right">200</property>
-                                <property name="margin-start">200</property>
-                                <property name="margin-end">200</property>
-                                <style>
-                                  <class name="post"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkListBoxRow">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <child>
-                              <object class="GtkButton" id="cancel_button">
-                                <property name="label" translatable="yes">Cancel</property>
-                                <property name="name">cancel_button</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
-                                <property name="valign">center</property>
-                                <property name="margin-left">200</property>
-                                <property name="margin-right">200</property>
-                                <property name="margin-start">200</property>
-                                <property name="margin-end">200</property>
-                                <style>
-                                  <class name="cancel"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
         </child>
       </object>
     </child>
