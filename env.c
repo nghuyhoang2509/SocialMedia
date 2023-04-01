@@ -1,10 +1,10 @@
-int LOGINED = 1; // 0 is did not login 1 is logined
+int LOGINED = 0; // 0 is did not login 1 is logined
 
 struct user_str
 {
-    const char *id;
-    const char *mail;
-    const char *fullname;
+    char id[100];
+    char mail[100];
+    char fullname[100];
 };
 
 struct user_str USER;

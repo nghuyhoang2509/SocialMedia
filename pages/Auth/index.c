@@ -96,7 +96,7 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
             {
                 ID = json_object_get_string(oid_obj);
                 // printf("_id: %s\n", ID);
-                USER.id = ID;
+                strcpy(USER.id, ID);
             }
         }
 
@@ -105,11 +105,11 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
 
         FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
         // printf("fullname: %s\n", FULLNAME);
-        USER.fullname = FULLNAME;
+        strcpy(USER.fullname, FULLNAME);
 
         EMAIL = json_object_get_string(json_object_object_get(root, "mail"));
         // printf("mail: %s\n", EMAIL);
-        USER.mail = EMAIL;
+        strcpy(USER.mail, EMAIL);
 
         const char *error = json_object_get_string(json_object_object_get(root, "error"));
         // printf("error: %s\n", error);

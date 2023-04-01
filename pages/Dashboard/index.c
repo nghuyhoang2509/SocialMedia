@@ -3,9 +3,9 @@ static GtkWidget *window;
 static int log_out_handle()
 {
     LOGINED = 0;
-    USER.fullname = NULL;
-    USER.mail = NULL;
-    USER.id = NULL;
+    strcpy(USER.fullname, "");
+    strcpy(USER.mail, "");
+    strcpy(USER.id, "");
     gtk_main_quit();
     gtk_widget_destroy(window);
     PROCESSINIT();
@@ -13,16 +13,21 @@ static int log_out_handle()
 
 static int everyone_handle()
 {
-    printf("Please waiting");
+    printf("Please waiting\n");
     Everyone();
 }
 
 static int discover_handle()
 {
-    printf("Please waiting");
+    printf("Please waiting\n");
     Discover();
 }
 
+static int personal_handle()
+{
+    printf("Please waiting\n");
+    Personal();
+}
 int Dashboard()
 {
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Dashboard/Dashboard.glade");
@@ -45,6 +50,7 @@ int Dashboard()
     g_signal_connect(log_out, "clicked", G_CALLBACK(log_out_handle), NULL);
     g_signal_connect(everyone, "clicked", G_CALLBACK(everyone_handle), NULL);
     g_signal_connect(discover, "clicked", G_CALLBACK(discover_handle), NULL);
+    g_signal_connect(personal, "clicked", G_CALLBACK(personal_handle), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();
