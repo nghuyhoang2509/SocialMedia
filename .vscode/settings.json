@@ -16,6 +16,7 @@
         "regex.h": "c",
         "tre.h": "c",
         "curl.h": "c",
-        "call_api.h": "c"
+        "call_api.h": "c",
+        "pthread.h": "c"
     }
 }

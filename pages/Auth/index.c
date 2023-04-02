@@ -127,7 +127,7 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
         {
             markup = "<span size='large' foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
-            printf("Sign in done");
+            printf("Sign in done\n");
             LOGINED = 1;
             gtk_widget_destroy(window);
             PROCESSINIT();

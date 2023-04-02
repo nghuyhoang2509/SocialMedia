@@ -18,19 +18,30 @@ static void cancel_button_click()
 
 static void add_post_to_list_box(const char *content)
 {
-    GtkWidget *label_content = gtk_label_new(content);
-    GtkWidget *label_test = gtk_label_new("hello");
-    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
     GtkWidget *row = gtk_list_box_row_new();
+    GtkWidget *label_content = gtk_label_new(content);
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 2);
+    GtkWidget *box_group_btn = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
+    GtkWidget *edit_btn = gtk_button_new_with_label("EDIT");
+    GtkWidget *delete_btn = gtk_button_new_with_label("DELETE");
+
     GtkStyleContext *context = gtk_widget_get_style_context(row);
     GtkStyleContext *context_label_content = gtk_widget_get_style_context(label_content);
+    GtkStyleContext *context_edit_btn = gtk_widget_get_style_context(edit_btn);
+    GtkStyleContext *context_delete_btn = gtk_widget_get_style_context(delete_btn);
     gtk_style_context_add_class(context, "post");
+    gtk_style_context_add_class(context_edit_btn, "h2");
+    gtk_style_context_add_class(context_delete_btn, "h2");
     gtk_style_context_add_class(context_label_content, "body");
+
+    gtk_box_set_homogeneous(GTK_BOX(box_group_btn), TRUE);
+    gtk_box_pack_start(GTK_BOX(box_group_btn), edit_btn, FALSE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box_group_btn), delete_btn, FALSE, TRUE, 0);
 
     gtk_label_set_line_wrap(GTK_LABEL(label_content), TRUE);
     gtk_label_set_line_wrap_mode(GTK_LABEL(label_content), PANGO_WRAP_WORD);
 
-    gtk_box_pack_start(GTK_BOX(box), label_test, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(box), box_group_btn, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(box), label_content, FALSE, FALSE, 0);
 
     gtk_widget_set_halign(row, GTK_ALIGN_CENTER);

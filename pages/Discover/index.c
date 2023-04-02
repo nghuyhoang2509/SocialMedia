@@ -28,6 +28,14 @@ static void add_post_to_list(const char *mail, const char *content)
 
 int Discover()
 {
+    GtkBuilder *builder = gtk_builder_new_from_file("./pages/Discover/Discover.glade");
+    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "discover_page"));
+
+    GtkCssProvider *provider = gtk_css_provider_new();
+    gtk_css_provider_load_from_path(provider, "./pages/Discover/style.css", NULL);
+
+    GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
+    list_post = GTK_LIST_BOX(list_box);
     char data[2];
     sprintf(data, "{}");
     printf("Loading discover, Please Wait");
@@ -36,16 +44,6 @@ int Discover()
     json_object *post_obj = json_object_object_get(root, "posts");
     int post_array_len = json_object_array_length(post_obj);
 
-    GtkBuilder *builder = gtk_builder_new_from_file("./pages/Discover/Discover.glade");
-
-    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "discover_page"));
-
-    GtkCssProvider *provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(provider, "./pages/Discover/style.css", NULL);
-
-    GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
-
-    list_post = GTK_LIST_BOX(list_box);
     for (int i = 0; i < post_array_len; i++)
     {
         json_object *post_string = json_object_array_get_idx(post_obj, i);
