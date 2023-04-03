@@ -82,7 +82,6 @@ int Personal()
         json_object_object_get_ex(post_json, "content", &content_post);
 
         add_post_to_list_box(json_object_get_string(content_post));
-        json_object_put(post_string);
     }
     json_object_put(root);
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);

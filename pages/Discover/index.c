@@ -54,7 +54,6 @@ int Discover()
         json_object_object_get_ex(post_json, "content", &content_post);
 
         add_post_to_list(json_object_get_string(mail_post), json_object_get_string(content_post));
-        json_object_put(post_string);
     }
     json_object_put(root);
 
