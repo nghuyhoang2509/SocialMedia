@@ -1,17 +1,3 @@
-#include <stdlib.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <gtk/gtkx.h>
-#include <libgen.h>
-#include <math.h>
-#include <ctype.h>
-#include <curl/curl.h>
-#include <json-c/json.h>
-#include <regex.h>
-#include "call_API.h"
 
 GtkBuilder *builder;
 GtkWidget *edit_window;
@@ -44,7 +30,7 @@ void on_save_btn_clicked(GtkWidget *e)
     char *markup = "";
     gpointer fullname = gtk_entry_get_text(fullname_edit);
     gpointer pass = gtk_entry_get_text(password_edit);
-    if (strlen(fullname) == 0|| strlen(pass) == 0)
+    if (strlen(fullname) == 0 || strlen(pass) == 0)
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
         gtk_label_set_markup(GTK_LABEL(edit_check), markup);
@@ -61,7 +47,7 @@ void on_save_btn_clicked(GtkWidget *e)
     sprintf(data, "{\"_id\":\"%s\", \"password\":\"%s\", \"fullname\":\"%s\"}", ID, pass, fullname);
 
     char *response = request("edit-account", data);
-    printf("%s\n",response);
+    printf("%s\n", response);
     json_object *root = json_tokener_parse(response);
     if (root == NULL)
     {
@@ -90,7 +76,7 @@ void on_save_btn_clicked(GtkWidget *e)
             sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(edit_check), error_status);
         }
-        else if(ID != NULL)
+        else if (ID != NULL)
         {
             char success_status[1000];
             sprintf(success_status, "<span foreground='#00FF00'>%s</span>", "Edit personal information done!");
@@ -125,7 +111,6 @@ int main(int agrc, char *agrv[])
     g_signal_connect(edit_window, "destroy", G_CALLBACK(gtk_main_quit), edit_window);
     g_signal_connect(save_btn, "clicked", G_CALLBACK(on_save_btn_clicked), NULL);
     g_signal_connect(password_edit, "changed", G_CALLBACK(on_entry_insert_spacebar), NULL);
-    
 
     gtk_widget_show(edit_window);
     gtk_builder_connect_signals(builder, NULL);
