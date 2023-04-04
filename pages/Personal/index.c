@@ -8,12 +8,22 @@ static GtkWidget *dialog_create;
 static GtkListBox *list_post;
 static GtkWidget *text_view;
 
-static void add_post_to_list_box(const char *content);
+static void add_post_to_list_box(const char *content, const char *ID);
 static void on_click_create_button();
 static void on_destroy();
 static void hide_dialog();
 static void create_a_post_button_click();
+static void on_delete_button_click(GtkWidget, gpointer);
+static void on_edit_button_click(GtkWidget, gpointer);
+static void create_a_post_button_click();
+static void reset_page();
 int Personal();
+
+typedef struct
+{
+    char ID[100];
+    char content[4096];
+} Editdata;
 
 static void on_click_create_button()
 {
@@ -25,10 +35,30 @@ static void on_click_create_button()
     sprintf(data, "{\"userId\": \"%s\", \"content\":\"%s\", \"mail\":\"%s\"}", USER.id, text, USER.mail);
     printf("creating post...\n");
     char *response = request("create-post", data);
+    g_free(text);
+    reset_page();
+}
+static void reset_page()
+{
     gtk_widget_destroy(window);
     gtk_widget_destroy(dialog_create);
-    g_free(text);
     Personal();
+}
+
+static void on_delete_button_click(GtkWidget e, gpointer id_pointer)
+{
+    char *id = (char *)id_pointer;
+    char data[100];
+    sprintf(data, "{\"_id\":\"%s\"}", id);
+    printf("Loading personal, Please Wait\n");
+    char *response = request("delete-post", data);
+    reset_page();
+}
+
+static void on_edit_button_click(GtkWidget e, gpointer edit_post_pointer)
+{
+    /*   Editdata *edit_post = (Editdata *)edit_post_pointer;
+      printf("%s", edit_post->ID); */
 }
 
 static void on_destroy()
@@ -46,7 +76,7 @@ static void create_a_post_button_click()
     gtk_widget_show_all(dialog_create);
 }
 
-static void add_post_to_list_box(const char *content)
+static void add_post_to_list_box(const char *content, const char *ID)
 {
     GtkWidget *row = gtk_list_box_row_new();
     GtkWidget *label_content = gtk_label_new(content);
@@ -77,6 +107,13 @@ static void add_post_to_list_box(const char *content)
     gtk_widget_set_halign(row, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(row, GTK_ALIGN_CENTER);
     gtk_container_add(GTK_CONTAINER(row), box);
+    /* struct Editdata *edit_post;
+    edit_post = g_malloc(sizeof(edit_post));
+    strcpy(edit_post->ID, ID);
+    strcpy(edit_post->content, content); */
+    g_signal_connect(delete_btn, "clicked", G_CALLBACK(on_delete_button_click), (gpointer)ID);
+    g_signal_connect(edit_btn, "clicked", G_CALLBACK(on_edit_button_click), /* (gpointer)edit_post */ NULL);
+
     gtk_list_box_insert(list_post, row, -1);
 }
 
@@ -115,9 +152,12 @@ int Personal()
         json_object *post_string = json_object_array_get_idx(post_obj, i);
         json_object *post_json = json_tokener_parse(json_object_get_string(post_string));
         json_object *content_post;
+        json_object *id_obj;
+        json_object *oid_obj;
         json_object_object_get_ex(post_json, "content", &content_post);
-
-        add_post_to_list_box(json_object_get_string(content_post));
+        json_object_object_get_ex(post_json, "_id", &id_obj);
+        json_object_object_get_ex(id_obj, "$oid", &oid_obj);
+        add_post_to_list_box(json_object_get_string(content_post), json_object_get_string(oid_obj));
     }
     json_object_put(root);
 
