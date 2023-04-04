@@ -55,7 +55,6 @@ int Discover()
 
         add_post_to_list(json_object_get_string(mail_post), json_object_get_string(content_post));
     }
-    json_object_put(root);
 
     css_set(window, provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
@@ -64,6 +63,7 @@ int Discover()
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
 
+    json_object_put(root);
     gtk_main();
 
     return EXIT_SUCCESS;
