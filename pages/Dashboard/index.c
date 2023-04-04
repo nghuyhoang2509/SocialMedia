@@ -17,6 +17,12 @@ static int everyone_handle()
     Everyone();
 }
 
+static int edit_handle()
+{
+    printf("Please waiting\n");
+    Edit();
+}
+
 static int discover_handle()
 {
     printf("Please waiting\n");
@@ -51,6 +57,7 @@ int Dashboard()
     g_signal_connect(everyone, "clicked", G_CALLBACK(everyone_handle), NULL);
     g_signal_connect(discover, "clicked", G_CALLBACK(discover_handle), NULL);
     g_signal_connect(personal, "clicked", G_CALLBACK(personal_handle), NULL);
+    g_signal_connect(edit_infor, "clicked", G_CALLBACK(edit_handle), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();

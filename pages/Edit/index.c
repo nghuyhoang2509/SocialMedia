@@ -1,16 +1,15 @@
+static GtkBuilder *builder;
+static GtkWidget *edit_window;
+static GtkEntry *password_edit;
+static GtkEntry *fullname_edit;
+static GtkWidget *edit_check;
+static GtkWidget *save_btn;
 
-GtkBuilder *builder;
-GtkWidget *edit_window;
-GtkEntry *password_edit;
-GtkEntry *fullname_edit;
-GtkWidget *edit_check;
-GtkWidget *save_btn;
-
-char *PASSWORD;
-char *FULLNAME;
-char *EMAIL;
-char *ID = "641dc6146d6d14241c07d5d1";
-void on_entry_insert_spacebar(GtkWidget *e)
+static const char *PASSWORD;
+static const char *FULLNAME;
+static const char *EMAIL;
+static const char *ID = USER.id;
+static void on_entry_insert_spacebar_handle(GtkWidget *e)
 {
     const gchar *text = gtk_entry_get_text(GTK_ENTRY(e));
     gint length = strlen(text);
@@ -20,16 +19,16 @@ void on_entry_insert_spacebar(GtkWidget *e)
         {
             // Không chấp nhận ký tự Space, xoá nó ra khỏi chuỗi đầu vào
             GtkEntryBuffer *buffer = gtk_entry_get_buffer(GTK_ENTRY(e));
-            gtk_editable_delete_text(GTK_ENTRY(e), i, i + 1);
+            gtk_editable_delete_text(GTK_EDITABLE(GTK_ENTRY(e)), i, i + 1);
         }
     }
 }
 
-void on_save_btn_clicked(GtkWidget *e)
+static void on_save_btn_clicked(GtkWidget *e)
 {
     char *markup = "";
-    gpointer fullname = gtk_entry_get_text(fullname_edit);
-    gpointer pass = gtk_entry_get_text(password_edit);
+    const gpointer fullname = (const gpointer)gtk_entry_get_text(fullname_edit);
+    const gpointer pass = (const gpointer)gtk_entry_get_text(password_edit);
     if (strlen(fullname) == 0 || strlen(pass) == 0)
     {
         markup = "<span foreground='#FF0000'>Please, fill in all the information!</span>";
@@ -84,18 +83,11 @@ void on_save_btn_clicked(GtkWidget *e)
         }
     }
 }
-void css_set(GtkCssProvider *cssProvider, GtkWidget *g_widget)
+
+int Edit()
 {
 
-    GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
-    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
-}
-
-int main(int agrc, char *agrv[])
-{
-
-    gtk_init(&agrc, &agrv);
-    builder = gtk_builder_new_from_file("Edit.glade");
+    builder = gtk_builder_new_from_file("./pages/Edit/Edit.glade");
 
     edit_window = GTK_WIDGET(gtk_builder_get_object(builder, "edit_window"));
     password_edit = GTK_ENTRY(gtk_builder_get_object(builder, "password_edit"));
@@ -104,13 +96,13 @@ int main(int agrc, char *agrv[])
     save_btn = GTK_WIDGET(gtk_builder_get_object(builder, "save_btn"));
 
     GtkCssProvider *css_provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(css_provider, "style.css", NULL);
-    css_set(css_provider, edit_window);
+    gtk_css_provider_load_from_path(css_provider, "./pages/Edit/style.css", NULL);
+    css_set(edit_window, css_provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(edit_window, "destroy", G_CALLBACK(gtk_main_quit), edit_window);
     g_signal_connect(save_btn, "clicked", G_CALLBACK(on_save_btn_clicked), NULL);
-    g_signal_connect(password_edit, "changed", G_CALLBACK(on_entry_insert_spacebar), NULL);
+    g_signal_connect(password_edit, "changed", G_CALLBACK(on_entry_insert_spacebar_handle), NULL);
 
     gtk_widget_show(edit_window);
     gtk_builder_connect_signals(builder, NULL);
