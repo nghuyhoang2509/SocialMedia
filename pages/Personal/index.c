@@ -1,15 +1,20 @@
 static GtkBuilder *builder;
 static GtkWidget *window;
 static GtkWidget *cancel_button;
+static GtkWidget *cancel1_button;
 static GtkWidget *create_button;
+static GtkWidget *edit_button;
 static GtkWidget *profile;
 static GtkWidget *create_a_post_btn;
 static GtkWidget *dialog_create;
+static GtkWidget *dialog_edit;
 static GtkListBox *list_post;
 static GtkWidget *text_view;
+static GtkWidget *text_edit;
 
 static void add_post_to_list_box(const char *content, const char *ID);
 static void on_click_create_button();
+static void on_click_edit_button(GtkWidget, gpointer);
 static void on_destroy();
 static void hide_dialog();
 static void create_a_post_button_click();
@@ -38,10 +43,28 @@ static void on_click_create_button()
     g_free(text);
     reset_page();
 }
+
+static void on_click_edit_button(GtkWidget e, gpointer id_pointer)
+{
+    char *id = (char *)id_pointer;
+    GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
+    GtkTextIter start_iter, end_iter;
+    gtk_text_buffer_get_bounds(text_buffer, &start_iter, &end_iter);
+    char *text = gtk_text_buffer_get_text(text_buffer, &start_iter, &end_iter, FALSE);
+    char data[5000];
+    sprintf(data, "{\"_id\":\"%s\",\"content\":\"%s\"}", id, text);
+    printf("Editing, Please Wait\n");
+    printf("%s", data);
+    char *response = request("edit-post", data);
+    g_free(text);
+    reset_page();
+}
+
 static void reset_page()
 {
     gtk_widget_destroy(window);
     gtk_widget_destroy(dialog_create);
+    gtk_widget_destroy(dialog_edit);
     Personal();
 }
 
@@ -50,15 +73,20 @@ static void on_delete_button_click(GtkWidget e, gpointer id_pointer)
     char *id = (char *)id_pointer;
     char data[100];
     sprintf(data, "{\"_id\":\"%s\"}", id);
-    printf("Loading personal, Please Wait\n");
+    printf("Deleting, Please Wait\n");
     char *response = request("delete-post", data);
     reset_page();
 }
 
 static void on_edit_button_click(GtkWidget e, gpointer edit_post_pointer)
 {
-    /*   Editdata *edit_post = (Editdata *)edit_post_pointer;
-      printf("%s", edit_post->ID); */
+    Editdata *edit_post = edit_post_pointer;
+    char *ID = edit_post->ID;
+    char *content = edit_post->content;
+    GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
+    gtk_text_buffer_set_text(text_buffer, content, -1);
+    gtk_widget_show_all(dialog_edit);
+    g_signal_connect(edit_button, "clicked", G_CALLBACK(on_click_edit_button), (gpointer)ID);
 }
 
 static void on_destroy()
@@ -69,6 +97,7 @@ static void on_destroy()
 static void hide_dialog()
 {
     gtk_widget_hide(dialog_create);
+    gtk_widget_hide(dialog_edit);
 }
 
 static void create_a_post_button_click()
@@ -107,13 +136,11 @@ static void add_post_to_list_box(const char *content, const char *ID)
     gtk_widget_set_halign(row, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(row, GTK_ALIGN_CENTER);
     gtk_container_add(GTK_CONTAINER(row), box);
-    /* struct Editdata *edit_post;
-    edit_post = g_malloc(sizeof(edit_post));
+    Editdata *edit_post = malloc(sizeof(Editdata));
     strcpy(edit_post->ID, ID);
-    strcpy(edit_post->content, content); */
+    strcpy(edit_post->content, content);
     g_signal_connect(delete_btn, "clicked", G_CALLBACK(on_delete_button_click), (gpointer)ID);
-    g_signal_connect(edit_btn, "clicked", G_CALLBACK(on_edit_button_click), /* (gpointer)edit_post */ NULL);
-
+    g_signal_connect(edit_btn, "clicked", G_CALLBACK(on_edit_button_click), (gpointer)edit_post);
     gtk_list_box_insert(list_post, row, -1);
 }
 
@@ -135,15 +162,23 @@ int Personal()
 
     dialog_create = GTK_WIDGET(gtk_builder_get_object(builder, "create_post_dialog"));
 
+    dialog_edit = GTK_WIDGET(gtk_builder_get_object(builder, "edit_post_dialog"));
+
     cancel_button = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cancel"));
 
+    cancel1_button = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cancel1"));
+
     create_button = GTK_WIDGET(gtk_builder_get_object(builder, "btn_create"));
+
+    edit_button = GTK_WIDGET(gtk_builder_get_object(builder, "btn_edit"));
 
     create_a_post_btn = GTK_WIDGET(gtk_builder_get_object(builder, "create_a_post_button"));
 
     profile = GTK_WIDGET(gtk_builder_get_object(builder, "profile"));
 
     text_view = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_post"));
+
+    text_edit = GTK_WIDGET(gtk_builder_get_object(builder, "text_edit_post"));
 
     GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
     list_post = GTK_LIST_BOX(list_box);
@@ -169,8 +204,10 @@ int Personal()
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(create_a_post_btn, "clicked", G_CALLBACK(create_a_post_button_click), NULL);
     g_signal_connect(cancel_button, "clicked", G_CALLBACK(hide_dialog), NULL);
+    g_signal_connect(cancel1_button, "clicked", G_CALLBACK(hide_dialog), NULL);
     g_signal_connect(create_button, "clicked", G_CALLBACK(on_click_create_button), NULL);
     g_signal_connect(dialog_create, "destroy", G_CALLBACK(on_destroy), NULL);
+    g_signal_connect(dialog_edit, "destroy", G_CALLBACK(on_destroy), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();
