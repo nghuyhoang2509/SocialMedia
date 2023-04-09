@@ -2,7 +2,6 @@ static GtkBuilder *builder;
 static GtkWidget *window;
 static GtkWidget *sign_in_frame;
 static GtkWidget *sign_up_frame;
-static GtkWidget *main_window;
 static GtkEntry *email_sign_in;
 static GtkEntry *email_sign_up;
 static GtkEntry *password_sign_in;
@@ -12,8 +11,6 @@ static GtkWidget *sign_in_btn;
 static GtkWidget *sign_up_btn;
 static GtkWidget *sign_up_now_btn;
 static GtkWidget *sign_in_now_btn;
-static GtkWidget *text_view;
-static GtkWidget *main_window;
 static GtkWidget *sign_in_check;
 static GtkWidget *sign_up_check;
 
@@ -73,6 +70,7 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
         return;
     }
+
     char data[1000];
     sprintf(data, "{\"mail\":\"%s\", \"password\":\"%s\"}", email, pass);
 
@@ -81,7 +79,7 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
     json_object *root = json_tokener_parse(response);
     if (root == NULL)
     {
-        printf("Loi khi doc JSON\n");
+        // printf("Loi khi doc JSON\n");
         markup = "<span size='large' foreground='#FF0000'>Something is wrong, please wait!</span>";
         gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
     }
@@ -100,34 +98,35 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
             }
         }
 
-        PASSWORD = json_object_get_string(json_object_object_get(root, "password"));
-        // printf("password: %s\n", PASSWORD);
-
-        FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
-        // printf("fullname: %s\n", FULLNAME);
-        strcpy(USER.fullname, FULLNAME);
-
-        EMAIL = json_object_get_string(json_object_object_get(root, "mail"));
-        // printf("mail: %s\n", EMAIL);
-        strcpy(USER.mail, EMAIL);
-
         const char *error = json_object_get_string(json_object_object_get(root, "error"));
         // printf("error: %s\n", error);
-
-        json_object_put(root);
-
         if (error != NULL)
         {
+            json_object_put(root);
             char error_status[1000];
-            printf("have error");
+            // printf("have error");
             sprintf(error_status, "<span size='large' foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(sign_in_check), error_status);
         }
         else
         {
+            PASSWORD = json_object_get_string(json_object_object_get(root, "password"));
+            // printf("password: %s\n", PASSWORD);
+
+            FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
+            // printf("fullname: %s\n", FULLNAME);
+
+            EMAIL = json_object_get_string(json_object_object_get(root, "mail"));
+            // printf("mail: %s\n", EMAIL);
+
+            json_object_put(root);
+            
+            strcpy(USER.fullname, FULLNAME);
+            strcpy(USER.mail, EMAIL);
+
             markup = "<span size='large' foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
-            printf("Sign in done\n");
+            // printf("Sign in done\n");
             LOGINED = 1;
             gtk_widget_destroy(window);
             PROCESSINIT();
@@ -207,10 +206,6 @@ static void on_sign_in_now_btn_clicked(GtkWidget *e)
     gtk_widget_hide(sign_up_frame);
     gtk_widget_show(sign_in_frame);
 }
-static void window_destroy(GtkWidget *w, gpointer window)
-{
-    gtk_widget_destroy(window);
-}
 
 int Auth()
 {
@@ -231,7 +226,6 @@ int Auth()
     sign_in_now_btn = GTK_WIDGET(gtk_builder_get_object(builder, "sign_in_now_btn"));
     sign_in_check = GTK_WIDGET(gtk_builder_get_object(builder, "sign_in_check"));
     sign_up_check = GTK_WIDGET(gtk_builder_get_object(builder, "sign_up_check"));
-    main_window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
 
     // add css
     GtkCssProvider *css_provider = gtk_css_provider_new();
@@ -240,7 +234,6 @@ int Auth()
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), window);
-    g_signal_connect(main_window, "destroy", G_CALLBACK(window_destroy), main_window);
     g_signal_connect(sign_in_btn, "clicked", G_CALLBACK(on_sign_in_btn_clicked), NULL);
     g_signal_connect(sign_up_btn, "clicked", G_CALLBACK(on_sign_up_btn_clicked), NULL);
     g_signal_connect(sign_up_now_btn, "clicked", G_CALLBACK(on_sign_up_now_btn_clicked), NULL);

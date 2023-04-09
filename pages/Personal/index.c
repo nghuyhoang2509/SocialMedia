@@ -11,6 +11,8 @@ static GtkWidget *dialog_edit;
 static GtkListBox *list_post;
 static GtkWidget *text_view;
 static GtkWidget *text_edit;
+static GtkWidget *noti_personal;
+static GtkWidget *overlay;
 
 static void add_post_to_list_box(const char *content, const char *ID);
 static void on_click_create_button();
@@ -24,6 +26,12 @@ static void create_a_post_button_click();
 static void reset_page();
 int Personal();
 
+static gboolean destroy_label(GtkWidget *e)
+{
+    gtk_widget_destroy(e);
+    return G_SOURCE_REMOVE;
+}
+
 typedef struct
 {
     char ID[100];
@@ -32,6 +40,13 @@ typedef struct
 
 static void on_click_create_button()
 {
+    // GtkLabel *noti_label = GTK_LABEL(gtk_label_new("Post created successfully"));
+    // char *markup = "<property name=\"pass-through\">False</property>\n<property name=\"index\">9999</property>";
+    // gtk_label_set_markup(GTK_LABEL(noti_label), markup);
+    //     // gtk_overlay_add_overlay(GTK_OVERLAY(overlay),GTK_LABEL(noti_label));
+    // gtk_container_add(GTK_CONTAINER(overlay),GTK_WIDGET(noti_label));
+    // g_timeout_add_seconds(2, (GSourceFunc)destroy_label, GTK_LABEL(noti_label));
+
     GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
     GtkTextIter start_iter, end_iter;
     gtk_text_buffer_get_bounds(text_buffer, &start_iter, &end_iter);
@@ -41,8 +56,40 @@ static void on_click_create_button()
     printf("creating post...\n");
     char *response = request("create-post", data);
     g_free(text);
-    reset_page();
+    char *markup = "";
+    json_object *root = json_tokener_parse(response);
+    if (root == NULL)
+    {
+        // printf("Loi khi doc JSON\n");
+        markup = "<span size='large' background='#FF0000'>Something is wrong, please wait!</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+    }
+
+    const char *error = json_object_get_string(json_object_object_get(root, "error"));
+    // printf("error: %s\n", error);
+    if (error != NULL)
+    {
+        json_object_put(root);
+        char error_status[1000];
+        // printf("have error");
+        sprintf(error_status, "<span size='large' background='#FF0000'>%s</span>", error);
+        gtk_label_set_markup(GTK_LABEL(noti_personal), error_status);
+
+    }
+    else
+    {
+        // markup = "<span size='large' background='#FF0000'>Post created successfully</span>";
+        // gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+        // GtkLabel *noti_label = GTK_LABEL(gtk_label_new("Post created successfully"));
+        // // gtk_overlay_add_overlay(GTK_OVERLAY(overlay),GTK_LABEL(noti_label));
+        // gtk_container_add(GTK_CONTAINER(overlay),GTK_WIDGET(noti_label));
+        // g_timeout_add_seconds(2, (GSourceFunc)destroy_label, GTK_LABEL(noti_label));
+        json_object_put(root);
+        reset_page();
+    }
+
 }
+
 
 static void on_click_edit_button(GtkWidget e, gpointer id_pointer)
 {
@@ -57,7 +104,33 @@ static void on_click_edit_button(GtkWidget e, gpointer id_pointer)
     printf("%s", data);
     char *response = request("edit-post", data);
     g_free(text);
-    reset_page();
+    char *markup = "";
+    json_object *root = json_tokener_parse(response);
+    if (root == NULL)
+    {
+        // printf("Loi khi doc JSON\n");
+         markup = "<span size='large' background='#FF0000'>Something is wrong, please wait!</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+    }
+
+    const char *error = json_object_get_string(json_object_object_get(root, "error"));
+    // printf("error: %s\n", error);
+    if (error != NULL)
+    {
+        json_object_put(root);
+        char error_status[1000];
+        // printf("have error");
+        sprintf(error_status, "<span size='large' background='#FF0000'>%s</span>", error);
+        gtk_label_set_markup(GTK_LABEL(noti_personal), error_status);
+    }
+    else
+    {
+        markup = "<span size='large' background='#FF0000'>Post edited successfully</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+        json_object_put(root);
+        reset_page();
+    }
+
 }
 
 static void reset_page()
@@ -75,7 +148,34 @@ static void on_delete_button_click(GtkWidget e, gpointer id_pointer)
     sprintf(data, "{\"_id\":\"%s\"}", id);
     printf("Deleting, Please Wait\n");
     char *response = request("delete-post", data);
-    reset_page();
+    
+    char *markup = "";
+    json_object *root = json_tokener_parse(response);
+    if (root == NULL)
+    {
+        // printf("Loi khi doc JSON\n");
+        markup = "<span size='large' background='#FF0000'>Something is wrong, please wait!</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+    }
+
+    const char *error = json_object_get_string(json_object_object_get(root, "error"));
+    // printf("error: %s\n", error);
+    if (error != NULL)
+    {
+        json_object_put(root);
+        char error_status[1000];
+        // printf("have error");
+        sprintf(error_status, "<span size='large' background='#FF0000'>%s</span>", error);
+        gtk_label_set_markup(GTK_LABEL(noti_personal), error_status);
+    }
+    else
+    {
+        markup = "<span size='large' background='#FF0000'>Post deleted successfully</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_personal), markup);
+        json_object_put(root);
+        reset_page();
+    }
+    
 }
 
 static void on_edit_button_click(GtkWidget e, gpointer edit_post_pointer)
@@ -102,7 +202,13 @@ static void hide_dialog()
 
 static void create_a_post_button_click()
 {
-    gtk_widget_show_all(dialog_create);
+    printf("test");
+    // gtk_widget_show_all(dialog_create);
+    GtkLabel *noti_label = GTK_LABEL(gtk_label_new("Post created successfully"));
+    // char *markup = "<property name=\"pass-through\">False</property>\n<property name=\"index\">9999</property>";
+    // gtk_label_set_markup(GTK_LABEL(noti_label), markup);
+    gtk_overlay_add_overlay(GTK_OVERLAY(overlay),GTK_LABEL(noti_label));
+    // gtk_container_add(GTK_CONTAINER(overlay),GTK_WIDGET(noti_label));
 }
 
 static void add_post_to_list_box(const char *content, const char *ID)
@@ -179,6 +285,10 @@ int Personal()
     text_view = GTK_WIDGET(gtk_builder_get_object(builder, "text_view_post"));
 
     text_edit = GTK_WIDGET(gtk_builder_get_object(builder, "text_edit_post"));
+
+    noti_personal = GTK_WIDGET(gtk_builder_get_object(builder, "noti_personal"));
+
+    overlay = GTK_WIDGET(gtk_builder_get_object(builder, "overlay"));
 
     GtkWidget *list_box = GTK_WIDGET(gtk_builder_get_object(builder, "list_box"));
     list_post = GTK_LIST_BOX(list_box);

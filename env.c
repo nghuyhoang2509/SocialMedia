@@ -1,4 +1,4 @@
-int LOGINED = 0; // 0 is did not login 1 is logined
+int LOGINED = 1; // 0 is did not login 1 is logined
 
 struct user_str
 {
@@ -8,3 +8,6 @@ struct user_str
 };
 
 struct user_str USER;
+// strcpy(USER.id,"641dc6146d6d14241c07d5d1");
+// strcpy(USER.mail,"huytest@gmail.com");
+// strcpy(USER.fullname,"Huy hay ho");

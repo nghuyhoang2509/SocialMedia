@@ -39,3 +39,17 @@
   padding: 10px 15px;
   margin: 0px 200px;
 }
+
+.round_corner {
+  border-radius: 13px;
+  border-style: none;
+}
+.green_bg {
+  background: #4ad97c;
+  color: #f2f2f2;
+  font-weight: bold;
+}
+.shadow {
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.3);
+}
+

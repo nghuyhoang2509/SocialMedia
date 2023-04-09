@@ -50,24 +50,18 @@ static void on_save_btn_clicked(GtkWidget *e)
     json_object *root = json_tokener_parse(response);
     if (root == NULL)
     {
-        printf("Loi khi doc JSON\n");
+        // printf("Loi khi doc JSON\n");
         markup = "<span foreground='#FF0000'>Something is wrong, please wait!</span>";
         gtk_label_set_markup(GTK_LABEL(edit_check), markup);
     }
     else
     {
-        printf("%s\n", response);
-
-        ID = json_object_get_string(json_object_object_get(root, "_id"));
-
-        FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
-
-        PASSWORD = json_object_get_string(json_object_object_get(root, "password"));
+        // printf("%s\n", response);
 
         const char *error = json_object_get_string(json_object_object_get(root, "error"));
-        printf("error: %s\n", error);
+        // printf("error: %s\n", error);
 
-        json_object_put(root);
+        
 
         if (error != NULL)
         {
@@ -75,12 +69,28 @@ static void on_save_btn_clicked(GtkWidget *e)
             sprintf(error_status, "<span foreground='#FF0000'>%s</span>", error);
             gtk_label_set_markup(GTK_LABEL(edit_check), error_status);
         }
-        else if (ID != NULL)
+        else
         {
-            char success_status[1000];
-            sprintf(success_status, "<span foreground='#00FF00'>%s</span>", "Edit personal information done!");
-            gtk_label_set_markup(GTK_LABEL(edit_check), success_status);
+
+            ID = json_object_get_string(json_object_object_get(root, "_id"));
+
+            FULLNAME = json_object_get_string(json_object_object_get(root, "fullname"));
+
+            PASSWORD = json_object_get_string(json_object_object_get(root, "password"));
+
+            if (ID != NULL)
+            {
+                char success_status[1000];
+                sprintf(success_status, "<span foreground='#00FF00'>%s</span>", "Edit personal information done!");
+                gtk_label_set_markup(GTK_LABEL(edit_check), success_status);
+            }
+            else
+            {
+                markup = "<span foreground='#FF0000'>Something is wrong, please wait!</span>";
+                gtk_label_set_markup(GTK_LABEL(edit_check), markup);
+            }
         }
+        json_object_put(root);
     }
 }
 
