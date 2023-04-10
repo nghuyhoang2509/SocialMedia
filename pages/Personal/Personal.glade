@@ -276,8 +276,6 @@
             <property name="ypad">10</property>
             <style>
               <class name="round_corner"/>
-              <class name="shadow"/>
-              <class name="green_bg"/>
             </style>
           </object>
           <packing>
@@ -287,52 +285,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkWindow" id="test">
-    <property name="name">test</property>
-    <property name="can-focus">False</property>
-    <property name="default-width">600</property>
-    <property name="default-height">600</property>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkOverlay" id="overlay_test">
-            <property name="name">overlay_test</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn">
-            <property name="label" translatable="yes">button</property>
-            <property name="name">btn</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <style>
-      <class name="window"/>
-    </style>
   </object>
 </interface>

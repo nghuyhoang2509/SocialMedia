@@ -54,7 +54,10 @@ static void on_entry_insert_spacebar(GtkWidget *e)
 }
 static void on_sign_in_btn_clicked(GtkWidget *e)
 {
-    // gchar *t = gtk_entry_get_text(email_sign_in);
+    // strcpy(USER.id,"641dc6146d6d14241c07d5d1");
+    // strcpy(USER.mail,"huytest@gmail.com");
+    // strcpy(USER.fullname,"Huy hay ho");
+    // PROCESSINIT();
     char *markup = "";
     const gpointer email = (const gpointer)gtk_entry_get_text(email_sign_in);
     const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_in);
