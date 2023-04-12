@@ -178,9 +178,10 @@
   <object class="GtkWindow" id="personal">
     <property name="name">personal</property>
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Profile</property>
     <child>
-      <object class="GtkOverlay" id="overlay">
-        <property name="name">overlay</property>
+      <object class="GtkOverlay" id="overlay_personal">
+        <property name="name">overlay_personal</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
@@ -276,7 +277,6 @@
             <property name="ypad">10</property>
             <style>
               <class name="round_corner"/>
-              <class name="green_bg"/>
             </style>
           </object>
           <packing>

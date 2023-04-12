@@ -20,6 +20,8 @@
 }
 .window {
   background-image: url("https://f-code.tech/static/media/background.5d17ffe36988d38fdec1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .gtk_create {
   color: #4ad97c;
