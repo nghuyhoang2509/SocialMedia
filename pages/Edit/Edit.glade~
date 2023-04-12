@@ -3,19 +3,34 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <!-- interface-css-provider-path style.css -->
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="edit_window">
+    <property name="name">edit_window</property>
     <property name="width-request">1000</property>
     <property name="height-request">700</property>
     <property name="can-focus">False</property>
     <property name="window-position">center</property>
     <child>
       <object class="GtkBox">
-        <property name="width-request">400</property>
-        <property name="height-request">600</property>
+        <property name="width-request">500</property>
+        <property name="height-request">800</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">50</property>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">../../images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkBox">
             <property name="name">test</property>
@@ -26,8 +41,7 @@
               <object class="GtkLabel" id="edit_label">
                 <property name="name">edit_label</property>
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="has-focus">True</property>
+                <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Edit personal information</property>
                 <property name="justify">center</property>
                 <style>
@@ -138,7 +152,7 @@
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <style>

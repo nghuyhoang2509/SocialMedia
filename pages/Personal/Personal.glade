@@ -196,13 +196,10 @@
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Profile</property>
-                    <style>
-                      <class name="h1"/>
-                    </style>
+                    <property name="pixbuf">../../images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>

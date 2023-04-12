@@ -1,67 +1,66 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <winsock2.h>
 
-#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "ws2_32.lib") // Winsock Library
 
-int main()
+int main(int argc, char *argv[])
 {
-    WSADATA wsaData;
-    SOCKET socket_client;
+    WSADATA wsa;
+    SOCKET s;
     struct sockaddr_in server;
-    char *message;
-    char server_reply[2000];
+    char *message, server_reply[2000];
     int recv_size;
 
-    // Khởi tạo Winsock
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+    printf("\nInitialising Winsock...");
+    if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
     {
-        printf("Khong the khoi tao Winsock\n");
+        printf("Failed. Error Code : %d", WSAGetLastError());
         return 1;
     }
 
-    // Tạo socket
-    if ((socket_client = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
+    printf("Initialised.\n");
+
+    // Create a socket
+    if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     {
-        printf("Khong the tao socket\n");
-        return 1;
+        printf("Could not create socket : %d", WSAGetLastError());
     }
 
-    // Cấu hình server address và port
+    printf("Socket created.\n");
+
+    server.sin_addr.s_addr = inet_addr("127.0.0.1");
     server.sin_family = AF_INET;
-    server.sin_addr.s_addr = inet_addr("ws://localhost");
     server.sin_port = htons(9001);
 
-    // Kết nối đến server
-    if (connect(socket_client, (struct sockaddr *)&server, sizeof(server)) < 0)
+    // Connect to remote server
+    if (connect(s, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
-        printf("Khong the ket noi den server\n");
+        puts("connect error");
         return 1;
     }
 
-    printf("Ket noi thanh cong\n");
+    puts("Connected");
 
-    // Gửi message đến server
+    // Send some data
     message = "GET / HTTP/1.1\r\n\r\n";
-    if (send(socket_client, message, strlen(message), 0) < 0)
+    if (send(s, message, strlen(message), 0) < 0)
     {
-        printf("Gui message khong thanh cong\n");
+        puts("Send failed");
         return 1;
     }
+    puts("Data Send\n");
 
-    // Nhận phản hồi từ server
-    if ((recv_size = recv(socket_client, server_reply, 2000, 0)) == SOCKET_ERROR)
+    // Receive a reply from the server
+    if ((recv_size = recv(s, server_reply, 2000, 0)) == SOCKET_ERROR)
     {
-        printf("Nhan phan hoi khong thanh cong\n");
-        return 1;
+        puts("recv failed");
     }
 
-    printf("Phan hoi tu server:\n");
-    printf("%s\n", server_reply);
+    puts("Reply received\n");
 
-    closesocket(socket_client);
-    WSACleanup();
-    getchar();
+    // Add a NULL terminating character to make it a proper string before printing
+    server_reply[recv_size] = '\0';
+    puts(server_reply);
+
     return 0;
 }

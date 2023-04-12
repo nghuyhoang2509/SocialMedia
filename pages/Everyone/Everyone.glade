@@ -16,14 +16,10 @@
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="label_name">
+          <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">List Everyone</property>
-            <style>
-              <class name="label_name"/>
-            </style>
+            <property name="pixbuf">../../images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
           </object>
           <packing>
             <property name="expand">False</property>

@@ -1,15 +1,11 @@
 .label_name {
-  color: #4ad97c;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: rgba(242, 188, 27, 0.3);
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .button {
-  color: white;
-  background: #4ad97c;
+  color: #4ad97c;
+  background: white;
   border: none;
   font-weight: bold;
 }

@@ -18,20 +18,12 @@
         <property name="margin-bottom">20</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="label_name">
-            <property name="name">ten_clb</property>
-            <property name="width-request">150</property>
-            <property name="height-request">150</property>
+          <object class="GtkImage">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="margin-top">20</property>
-            <property name="margin-bottom">20</property>
-            <property name="label" translatable="yes">FCODE_DISCOVER</property>
-            <attributes>
-              <attribute name="size" value="15360"/>
-            </attributes>
+            <property name="pixbuf">images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
             <style>
               <class name="label_name"/>
             </style>
@@ -63,15 +55,45 @@
                 <property name="column-spacing">60</property>
                 <child>
                   <object class="GtkButton" id="discover">
-                    <property name="label" translatable="yes">Discover</property>
                     <property name="name">discover</property>
-                    <property name="width-request">150</property>
-                    <property name="height-request">80</property>
+                    <property name="width-request">200</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">images\icons8-discovery-64.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">discover</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="button"/>
                     </style>
@@ -83,15 +105,45 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="everyone">
-                    <property name="label" translatable="yes">Everyone</property>
                     <property name="name">everyone</property>
-                    <property name="width-request">150</property>
-                    <property name="height-request">80</property>
+                    <property name="width-request">200</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">images\icons8-chat-room-64.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">chat</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="button"/>
                     </style>
@@ -103,15 +155,45 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="personal">
-                    <property name="label" translatable="yes">Personal</property>
                     <property name="name">personal</property>
-                    <property name="width-request">150</property>
-                    <property name="height-request">80</property>
+                    <property name="width-request">200</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">images\icons8-personal-information-64.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">personal</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="button"/>
                     </style>
@@ -123,15 +205,45 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="edit_infor">
-                    <property name="label" translatable="yes">Edit information</property>
                     <property name="name">edit_infor</property>
-                    <property name="width-request">150</property>
-                    <property name="height-request">80</property>
+                    <property name="width-request">200</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">images\icons8-settings-64.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">edit information</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="button"/>
                     </style>
@@ -143,15 +255,45 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="log_out">
-                    <property name="label" translatable="yes">Log out</property>
                     <property name="name">log_out</property>
-                    <property name="width-request">150</property>
-                    <property name="height-request">80</property>
+                    <property name="width-request">200</property>
+                    <property name="height-request">100</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">images\icons8-logout-64.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">log out</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="button"/>
                     </style>
@@ -186,65 +328,5 @@
     <style>
       <class name="windows"/>
     </style>
-  </object>
-  <object class="GtkWindow" id="everyone_page">
-    <property name="can-focus">False</property>
-    <property name="resizable">False</property>
-    <property name="window-position">center</property>
-    <property name="default-width">500</property>
-    <property name="default-height">600</property>
-    <property name="gravity">center</property>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkLabel" id="label_name_everyone">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">List Everyone</property>
-            <style>
-              <class name="label_name"/>
-            </style>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="shadow-type">in</property>
-            <child>
-              <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <child>
-                  <object class="GtkListBox" id="list_box">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="selection-mode">none</property>
-                    <property name="activate-on-single-click">False</property>
-                    <style>
-                      <class name="list_box"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
 </interface>

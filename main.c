@@ -14,7 +14,7 @@
 #include <libwebsockets.h>
 #include <pthread.h>
 
-#include "socket.c"
+/* #include "socket.c" */
 #include "call_API.c"
 #include "handle.h"
 #include "env.c"
