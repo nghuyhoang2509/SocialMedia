@@ -17,6 +17,17 @@
         "tre.h": "c",
         "curl.h": "c",
         "call_api.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "libwebsockets.h": "c",
+        "deque": "c",
+        "vector": "c",
+        "exception": "c",
+        "memory": "c",
+        "istream": "c",
+        "new": "c",
+        "ostream": "c",
+        "system_error": "c",
+        "*.tcc": "c",
+        "winsock2.h": "c"
     }
 }

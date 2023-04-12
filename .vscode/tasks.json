@@ -22,6 +22,7 @@
 				"-IC:/msys64/mingw64/bin/../include/gdk-pixbuf-2.0",
 				"-IC:/msys64/mingw64/bin/../include/webp",
 				"-IC:/msys64/mingw64/bin/../include/atk-1.0",
+				"-IC:/msys64/mingw64/bin/../include/libwebsockets",
 				"-DLIBDEFLATE_DLL",
                 "${file}",
 				"-LC:/msys64/mingw64/bin/../lib",
@@ -56,7 +57,9 @@
 				"-lintl",		
 				"-lcurl",
 				"-ljson-c",
+				"-lwebsockets",		
 				"-lregex",
+				"-lws2_32",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
