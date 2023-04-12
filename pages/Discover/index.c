@@ -1,6 +1,13 @@
 static void add_post_to_list(const char *mail, const char *content);
 
 static GtkListBox *list_post;
+static GtkWidget *noti_discover;
+static GtkWidget *overlay_discover;
+static gboolean hide_label_discover(GtkWidget *e)
+{
+    gtk_widget_hide(e);
+    return G_SOURCE_REMOVE;
+}
 
 static void add_post_to_list(const char *mail, const char *content)
 {
@@ -30,7 +37,8 @@ int Discover()
 {
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Discover/Discover.glade");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "discover_page"));
-
+    noti_discover = GTK_WIDGET(gtk_builder_get_object(builder, "noti_personal"));
+    overlay_discover = GTK_WIDGET(gtk_builder_get_object(builder, "overlay_discover"));
     GtkCssProvider *provider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(provider, "./pages/Discover/style.css", NULL);
 
@@ -40,22 +48,36 @@ int Discover()
     sprintf(data, "{}");
     printf("Loading discover, Please Wait");
     char *response = request("all-post", data);
+    char *markup = "";
     json_object *root = json_tokener_parse(response);
-    json_object *post_obj = json_object_object_get(root, "posts");
-    int post_array_len = json_object_array_length(post_obj);
-
-    for (int i = 0; i < post_array_len; i++)
+    if (root == NULL)
     {
-        json_object *post_string = json_object_array_get_idx(post_obj, i);
-        json_object *post_json = json_tokener_parse(json_object_get_string(post_string));
-        json_object *mail_post;
-        json_object *content_post;
-        json_object_object_get_ex(post_json, "mail", &mail_post);
-        json_object_object_get_ex(post_json, "content", &content_post);
+        // printf("Loi khi doc JSON\n");
+        markup = "<span size='large' foreground='#FF0000'>Something is wrong, please wait!</span>";
+        gtk_label_set_markup(GTK_LABEL(noti_discover), markup);
+        gtk_widget_show(noti_discover);
+        g_timeout_add_seconds(2, (GSourceFunc)hide_label_discover, GTK_LABEL(noti_discover));
+    }
+    else
+    {
+        json_object *post_obj = json_object_object_get(root, "posts");
+        int post_array_len = json_object_array_length(post_obj);
 
-        add_post_to_list(json_object_get_string(mail_post), json_object_get_string(content_post));
+        for (int i = 0; i < post_array_len; i++)
+        {
+            json_object *post_string = json_object_array_get_idx(post_obj, i);
+            json_object *post_json = json_tokener_parse(json_object_get_string(post_string));
+            json_object *mail_post;
+            json_object *content_post;
+            json_object_object_get_ex(post_json, "mail", &mail_post);
+            json_object_object_get_ex(post_json, "content", &content_post);
+
+            add_post_to_list(json_object_get_string(mail_post), json_object_get_string(content_post));
+        }
+
     }
 
+    
     css_set(window, provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
