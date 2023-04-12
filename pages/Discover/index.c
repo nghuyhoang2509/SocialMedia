@@ -1,5 +1,5 @@
 static void add_post_to_list(const char *mail, const char *content);
-
+static GtkWidget *window;
 static GtkListBox *list_post;
 static GtkWidget *noti_discover;
 static GtkWidget *overlay_discover;
@@ -7,6 +7,13 @@ static gboolean hide_label_discover(GtkWidget *e)
 {
     gtk_widget_hide(e);
     return G_SOURCE_REMOVE;
+}
+
+static void handle_back_discover()
+{
+    gtk_widget_destroy(window);
+    gtk_main_quit();
+    PROCESSINIT();
 }
 
 static void add_post_to_list(const char *mail, const char *content)
@@ -36,7 +43,8 @@ static void add_post_to_list(const char *mail, const char *content)
 int Discover()
 {
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Discover/Discover.glade");
-    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "discover_page"));
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "discover_page"));
+    GtkWidget *btn_back_dashboard = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_dashboard"));
     noti_discover = GTK_WIDGET(gtk_builder_get_object(builder, "noti_personal"));
     overlay_discover = GTK_WIDGET(gtk_builder_get_object(builder, "overlay_discover"));
     GtkCssProvider *provider = gtk_css_provider_new();
@@ -74,14 +82,13 @@ int Discover()
 
             add_post_to_list(json_object_get_string(mail_post), json_object_get_string(content_post));
         }
-
     }
 
-    
     css_set(window, provider);
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(btn_back_dashboard, "clicked", G_CALLBACK(handle_back_discover), NULL);
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
 

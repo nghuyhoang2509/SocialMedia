@@ -16,12 +16,12 @@ static GtkWidget *overlay_personal;
 static int test = 1;
 static void add_post_to_list_box(const char *content, const char *ID);
 static void on_click_create_button();
-static void on_click_edit_button(GtkWidget*, gpointer);
+static void on_click_edit_button(GtkWidget *, gpointer);
 static void on_destroy();
 static gboolean hide_dialog();
 static void create_a_post_button_click();
-static void on_delete_button_click(GtkWidget*, gpointer);
-static void on_edit_button_click(GtkWidget*, gpointer);
+static void on_delete_button_click(GtkWidget *, gpointer);
+static void on_edit_button_click(GtkWidget *, gpointer);
 static void create_a_post_button_click();
 static void reset_page();
 int Personal();
@@ -40,27 +40,32 @@ typedef struct
     GtkWidget *w;
 } Post;
 
+static void handle_back_personal()
+{
+    gtk_widget_destroy(window);
+    gtk_main_quit();
+    PROCESSINIT();
+}
+
 void edit_content_post(GtkWidget *widget, gpointer data)
-{   
-    if (GTK_IS_LABEL(widget) && gtk_label_get_current_uri(GTK_LABEL(widget)) == NULL && strcmp(gtk_label_get_text(GTK_LABEL(widget)),"EDIT") != 0 && strcmp(gtk_label_get_text(GTK_LABEL(widget)),"DELETE") != 0)
+{
+    if (GTK_IS_LABEL(widget) && gtk_label_get_current_uri(GTK_LABEL(widget)) == NULL && strcmp(gtk_label_get_text(GTK_LABEL(widget)), "EDIT") != 0 && strcmp(gtk_label_get_text(GTK_LABEL(widget)), "DELETE") != 0)
     {
-            // printf("%s",gtk_label_get_text(GTK_LABEL(widget)));
+        // printf("%s",gtk_label_get_text(GTK_LABEL(widget)));
 
-            gtk_label_set_text(GTK_LABEL(widget),data);
+        gtk_label_set_text(GTK_LABEL(widget), data);
 
-            GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
-            gtk_text_buffer_set_text(text_buffer, data, -1);
+        GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
+        gtk_text_buffer_set_text(text_buffer, data, -1);
 
-            gtk_widget_show_all(widget);
-            gtk_widget_show_all(text_edit);
-        
+        gtk_widget_show_all(widget);
+        gtk_widget_show_all(text_edit);
     }
     else if (GTK_IS_CONTAINER(widget))
     {
-        gtk_container_foreach(GTK_CONTAINER(widget), (GtkCallback) edit_content_post, data);
+        gtk_container_foreach(GTK_CONTAINER(widget), (GtkCallback)edit_content_post, data);
     }
 }
-
 
 static void reset_page()
 {
@@ -105,7 +110,6 @@ static void on_click_create_button()
     json_object *root = json_tokener_parse(response);
 
     char *markup = "";
- 
 
     if (root == NULL)
     {
@@ -154,7 +158,7 @@ static void on_click_edit_button(GtkWidget *e, gpointer post_pointer)
     Post *post_data = post_pointer;
     char *id = post_data->ID;
     char *content = post_data->content;
-    char *dir =post_data->dir;
+    char *dir = post_data->dir;
 
     GtkWidget *widget = post_data->w;
     GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
@@ -166,10 +170,10 @@ static void on_click_edit_button(GtkWidget *e, gpointer post_pointer)
     sprintf(data, "{\"_id\":\"%s\",\"content\":\"%s\"}", id, text);
     // printf("Editing, Please Wait\n");
     char *response = request("edit-post", data);
-   
+
     char *markup = "";
     hide_dialog();
-    
+
     json_object *root = json_tokener_parse(response);
     if (root == NULL)
     {
@@ -199,10 +203,10 @@ static void on_click_edit_button(GtkWidget *e, gpointer post_pointer)
         g_timeout_add_seconds(2, (GSourceFunc)hide_label, GTK_LABEL(noti_personal));
         GtkWidget *parent = gtk_widget_get_parent(widget);
         GtkWidget *container = gtk_widget_get_parent(parent);
-        strcpy(dir,text);
+        strcpy(dir, text);
         // printf("1: %p\n",dir);
         // printf("2: %s\n",dir);
-        edit_content_post(container,text);
+        edit_content_post(container, text);
     }
     gtk_widget_show_all(GTK_WIDGET(list_post));
     json_object_put(root);
@@ -217,19 +221,18 @@ static void on_edit_button_click(GtkWidget *e, gpointer edit_post_pointer)
 
     GtkTextBuffer *text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_edit));
     gtk_text_buffer_set_text(text_buffer, content, -1);
-    
-    // printf("content: %s\n",content);
 
+    // printf("content: %s\n",content);
 
     gtk_widget_show_all(dialog_edit);
     Post *post_data = malloc(sizeof(Post));
     strcpy(post_data->ID, ID);
     strcpy(post_data->content, content);
     post_data->dir = edit_post->content;
-    post_data->w= e;
-  
+    post_data->w = e;
+
     g_signal_handlers_destroy(edit_button);
-    g_signal_connect(edit_button, "clicked",G_CALLBACK(on_click_edit_button), (gpointer)post_data);
+    g_signal_connect(edit_button, "clicked", G_CALLBACK(on_click_edit_button), (gpointer)post_data);
 }
 
 static void on_delete_button_click(GtkWidget *e, gpointer id_pointer)
@@ -256,7 +259,7 @@ static void on_delete_button_click(GtkWidget *e, gpointer id_pointer)
     const char *error = json_object_get_string(json_object_object_get(root, "error"));
     // printf("error: %s\n", error);
     if (error != NULL)
-    {     
+    {
         char error_status[1000];
         // printf("have error");
         sprintf(error_status, "<span size='large' foreground='#FF0000'>%s</span>", error);
@@ -273,7 +276,6 @@ static void on_delete_button_click(GtkWidget *e, gpointer id_pointer)
         GtkWidget *parent = gtk_widget_get_parent(e);
         GtkWidget *container = gtk_widget_get_parent(gtk_widget_get_parent(parent));
         gtk_widget_destroy(container);
-
     }
     gtk_widget_show_all(GTK_WIDGET(list_post));
     json_object_put(root);
@@ -287,6 +289,7 @@ static void add_post_to_list_box(const char *content, const char *ID)
     GtkWidget *box_group_btn = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 2);
     GtkWidget *edit_btn = gtk_button_new_with_label("EDIT");
     GtkWidget *delete_btn = gtk_button_new_with_label("DELETE");
+    GtkWidget *btn_back_dashboard = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_dashboard"));
 
     GtkStyleContext *context = gtk_widget_get_style_context(row);
     GtkStyleContext *context_label_content = gtk_widget_get_style_context(label_content);
@@ -317,6 +320,7 @@ static void add_post_to_list_box(const char *content, const char *ID)
 
     g_signal_connect(delete_btn, "clicked", G_CALLBACK(on_delete_button_click), (gpointer)ID);
     g_signal_connect(edit_btn, "clicked", G_CALLBACK(on_edit_button_click), (gpointer)edit_post);
+
     gtk_list_box_insert(list_post, row, -1);
     gtk_widget_show_all(GTK_WIDGET(list_post));
 }
@@ -327,6 +331,7 @@ int Personal()
     builder = gtk_builder_new_from_file("./pages/Personal/Personal.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "personal"));
+    GtkWidget *btn_back_dashboard = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_dashboard"));
 
     dialog_create = GTK_WIDGET(gtk_builder_get_object(builder, "create_post_dialog"));
 
@@ -390,6 +395,8 @@ int Personal()
     g_signal_connect(create_button, "clicked", G_CALLBACK(on_click_create_button), NULL);
     g_signal_connect(dialog_create, "delete_event", G_CALLBACK(hide_dialog), NULL);
     g_signal_connect(dialog_edit, "destroy", G_CALLBACK(hide_dialog), NULL);
+    g_signal_connect(btn_back_dashboard, "clicked", G_CALLBACK(handle_back_personal), NULL);
+
     gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
     gtk_main();

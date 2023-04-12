@@ -31,11 +31,69 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">20</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="valign">center</property>
-                        <property name="pixbuf">../../images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
+                        <child>
+                          <object class="GtkButton" id="btn_back_dashboard">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="has-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="homogeneous">True</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="pixbuf">../../images\icons8-dashboard-64.png</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label" translatable="yes">back to dashboard</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="pack-type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="logo_app">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="valign">center</property>
+                            <property name="pixbuf">../../images\fcode-discover-low-resolution-logo-color-on-transparent-background.png</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>

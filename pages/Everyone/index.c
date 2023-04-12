@@ -1,6 +1,14 @@
 static void add_mail_to_list(const char *mail);
 
 static GtkListBox *list_mail;
+static GtkWidget *window;
+
+static void handle_back_everyone()
+{
+    gtk_widget_destroy(window);
+    gtk_main_quit();
+    PROCESSINIT();
+}
 
 static void add_mail_to_list(const char *mail)
 {
@@ -24,7 +32,8 @@ int Everyone()
 
     GtkBuilder *builder = gtk_builder_new_from_file("./pages/Everyone/Everyone.glade");
 
-    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "everyone_page"));
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "everyone_page"));
+    GtkWidget *btn_back_dashboard = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_dashboard"));
 
     GtkCssProvider *provider = gtk_css_provider_new();
     gtk_css_provider_load_from_path(provider, "./pages/Everyone/style.css", NULL);
@@ -44,6 +53,8 @@ int Everyone()
     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+    g_signal_connect(btn_back_dashboard, "clicked", G_CALLBACK(handle_back_everyone), NULL);
+
     gtk_widget_show_all(window);
 
     gtk_main();
