@@ -3,4 +3,4 @@ request_test.c
 request_test.exe
 test.c
 test.exe
-main.exe
+./main.exe
