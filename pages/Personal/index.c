@@ -204,8 +204,6 @@ static void on_click_edit_button(GtkWidget *e, gpointer post_pointer)
         GtkWidget *parent = gtk_widget_get_parent(widget);
         GtkWidget *container = gtk_widget_get_parent(parent);
         strcpy(dir, text);
-        // printf("1: %p\n",dir);
-        // printf("2: %s\n",dir);
         edit_content_post(container, text);
     }
     gtk_widget_show_all(GTK_WIDGET(list_post));
@@ -235,9 +233,11 @@ static void on_edit_button_click(GtkWidget *e, gpointer edit_post_pointer)
     g_signal_connect(edit_button, "clicked", G_CALLBACK(on_click_edit_button), (gpointer)post_data);
 }
 
-static void on_delete_button_click(GtkWidget *e, gpointer id_pointer)
+static void on_delete_button_click(GtkWidget *e, gpointer edit_post_pointer)
 {
-    char *id = (char *)id_pointer;
+    Editdata *edit_post = edit_post_pointer;
+    char *id = edit_post->ID;
+    printf("%s\n",id);
     char data[100];
     sprintf(data, "{\"_id\":\"%s\"}", id);
     // printf("Deleting, Please Wait\n");
@@ -318,10 +318,10 @@ static void add_post_to_list_box(const char *content, const char *ID)
     strcpy(edit_post->ID, ID);
     strcpy(edit_post->content, content);
 
-    g_signal_connect(delete_btn, "clicked", G_CALLBACK(on_delete_button_click), (gpointer)ID);
+    g_signal_connect(delete_btn, "clicked", G_CALLBACK(on_delete_button_click), (gpointer)edit_post);
     g_signal_connect(edit_btn, "clicked", G_CALLBACK(on_edit_button_click), (gpointer)edit_post);
 
-    gtk_list_box_insert(list_post, row, -1);
+    gtk_list_box_prepend(list_post, row);
     gtk_widget_show_all(GTK_WIDGET(list_post));
 }
 
@@ -368,7 +368,7 @@ int Personal()
     json_object *root = json_tokener_parse(response);
     json_object *post_obj = json_object_object_get(root, "posts");
     int post_array_len = json_object_array_length(post_obj);
-    for (int i = post_array_len - 1; i >= 0; i--)
+    for (int i = 0; i < post_array_len; i++)
     {
         json_object *post_string = json_object_array_get_idx(post_obj, i);
         json_object *post_json = json_tokener_parse(json_object_get_string(post_string));
@@ -394,7 +394,7 @@ int Personal()
     g_signal_connect(cancel1_button, "clicked", G_CALLBACK(hide_dialog), NULL);
     g_signal_connect(create_button, "clicked", G_CALLBACK(on_click_create_button), NULL);
     g_signal_connect(dialog_create, "delete_event", G_CALLBACK(hide_dialog), NULL);
-    g_signal_connect(dialog_edit, "destroy", G_CALLBACK(hide_dialog), NULL);
+    g_signal_connect(dialog_edit, "delete_event", G_CALLBACK(hide_dialog), NULL);
     g_signal_connect(btn_back_dashboard, "clicked", G_CALLBACK(handle_back_personal), NULL);
 
     gtk_window_maximize(GTK_WINDOW(window));

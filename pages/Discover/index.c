@@ -37,7 +37,7 @@ static void add_post_to_list(const char *mail, const char *content)
     gtk_widget_set_halign(row, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(row, GTK_ALIGN_CENTER);
     gtk_container_add(GTK_CONTAINER(row), box);
-    gtk_list_box_insert(list_post, row, -1);
+    gtk_list_box_prepend(list_post, row);
 }
 
 int Discover()

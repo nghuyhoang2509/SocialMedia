@@ -19,6 +19,7 @@
             <property name="name">sign_in_frame</property>
             <property name="width-request">900</property>
             <property name="height-request">600</property>
+            <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
@@ -27,6 +28,9 @@
                 <property name="name">sign_in_label</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="receives-default">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Sign In</property>
                 <property name="justify">center</property>
                 <style>
@@ -207,7 +211,6 @@
             <property name="name">sign_up_frame</property>
             <property name="width-request">900</property>
             <property name="height-request">600</property>
-            <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
