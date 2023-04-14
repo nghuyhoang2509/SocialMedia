@@ -206,6 +206,9 @@
             <property name="position">4</property>
           </packing>
         </child>
+        <child>
+          <placeholder/>
+        </child>
         <style>
           <class name="box"/>
         </style>

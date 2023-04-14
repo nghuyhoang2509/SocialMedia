@@ -8,3 +8,7 @@ struct user_str
 };
 
 struct user_str USER;
+
+pthread_t ID_THREAD_SOCKET;
+SOCKET server_fd;
+char mail_selected[100];

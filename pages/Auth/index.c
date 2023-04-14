@@ -57,7 +57,7 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
     char *markup = "";
     const gpointer email = (const gpointer)gtk_entry_get_text(email_sign_in);
     const gpointer pass = (const gpointer)gtk_entry_get_text(password_sign_in);
-   
+
     if (strlen(email) == 0 || strlen(pass) == 0)
     {
         markup = "<span size='large' foreground='#FF0000'>Please, fill in all the information!</span>";
@@ -120,10 +120,9 @@ static void on_sign_in_btn_clicked(GtkWidget *e)
             // printf("mail: %s\n", EMAIL);
 
             json_object_put(root);
-            
+
             strcpy(USER.fullname, FULLNAME);
             strcpy(USER.mail, EMAIL);
-
             markup = "<span size='large' foreground='#00FF00'>Sign in done</span>";
             gtk_label_set_markup(GTK_LABEL(sign_in_check), markup);
             // printf("Sign in done\n");
@@ -198,23 +197,21 @@ static void on_sign_up_btn_clicked(GtkWidget *e)
 }
 static void on_sign_up_now_btn_clicked(GtkWidget *e)
 {
-    
-    gtk_entry_set_text(email_sign_in,"");
-    gtk_entry_set_text(password_sign_in,"");
-    gtk_label_set_text(GTK_LABEL(sign_in_check),"");
+
+    gtk_entry_set_text(email_sign_in, "");
+    gtk_entry_set_text(password_sign_in, "");
+    gtk_label_set_text(GTK_LABEL(sign_in_check), "");
     gtk_widget_hide(sign_in_frame);
     gtk_widget_show(sign_up_frame);
-
-}   
+}
 static void on_sign_in_now_btn_clicked(GtkWidget *e)
 {
-    gtk_entry_set_text(email_sign_up,"");
-    gtk_entry_set_text(password_sign_up,"");
-    gtk_entry_set_text(fullname_sign_up,"");
-   gtk_label_set_text(GTK_LABEL(sign_up_check),"");
+    gtk_entry_set_text(email_sign_up, "");
+    gtk_entry_set_text(password_sign_up, "");
+    gtk_entry_set_text(fullname_sign_up, "");
+    gtk_label_set_text(GTK_LABEL(sign_up_check), "");
     gtk_widget_hide(sign_up_frame);
     gtk_widget_show(sign_in_frame);
-    
 }
 
 int Auth()

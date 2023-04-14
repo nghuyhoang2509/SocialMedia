@@ -1,29 +1,78 @@
-#include <stdio.h>
-#include <winsock2.h>
+void *listen_socket()
+{
+    char server_recv[1024];
+    int leave_flag = 0;
 
-#pragma comment(lib, "ws2_32.lib") // Winsock Library
+    while (1)
+    {
+        if (leave_flag == 1)
+        {
+            break;
+        }
+        int receive = recv(server_fd, server_recv, 1024, 0);
+        if (receive == 0)
+        {
+            leave_flag = 1;
+        }
+        if (receive > 0)
+        {
+            json_object *data_parse_from_server = json_tokener_parse(server_recv);
+            json_object *status_obj;
+            json_object_object_get_ex(data_parse_from_server, "status", &status_obj);
+            int status = json_object_get_int(status_obj);
+            if (status == 1)
+            {
+                json_object *from_obj;
+                json_object *data_obj;
+                json_object_object_get_ex(data_parse_from_server, "from", &from_obj);
+                json_object_object_get_ex(data_parse_from_server, "data", &data_obj);
+                const char *data = json_object_get_string(data_obj);
+                const char *from = json_object_get_string(from_obj);
+                recieve_message(data);
+            }
+            else if (status == 2)
+            {
+                printf("Nguoi dung k online");
+            }
+        }
+    }
+}
 
-int main(int argc, char *argv[])
+int send_data_socket(const char *message, const char *to)
+{
+    char json_data[1024];
+    sprintf(json_data, "{\"status\":\"1\",\"from\":\"%s\",\"to\":\"%s\",\"data\":\"%s\"}", USER.mail, to, message);
+    if (send(server_fd, json_data, 1024, 0) < 0)
+    {
+    }
+    else
+    {
+        return 0;
+    };
+}
+
+int Connect_socket()
 {
     WSADATA wsa;
-    SOCKET s;
     struct sockaddr_in server;
-    char *message, server_reply[2000];
-    int recv_size;
+    char *message, server_reply[200];
 
     printf("\nInitialising Winsock...");
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
     {
         printf("Failed. Error Code : %d", WSAGetLastError());
+        exit(EXIT_FAILURE);
+
         return 1;
     }
 
     printf("Initialised.\n");
 
     // Create a socket
-    if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
     {
         printf("Could not create socket : %d", WSAGetLastError());
+        exit(EXIT_FAILURE);
     }
 
     printf("Socket created.\n");
@@ -33,34 +82,26 @@ int main(int argc, char *argv[])
     server.sin_port = htons(9001);
 
     // Connect to remote server
-    if (connect(s, (struct sockaddr *)&server, sizeof(server)) < 0)
+    if (connect(server_fd, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
         puts("connect error");
-        return 1;
+        exit(EXIT_FAILURE);
     }
-
-    puts("Connected");
-
-    // Send some data
-    message = "GET / HTTP/1.1\r\n\r\n";
-    if (send(s, message, strlen(message), 0) < 0)
+    if (send(server_fd, USER.mail, 100, 0) < 0)
     {
-        puts("Send failed");
-        return 1;
+        puts("send mail error");
+        exit(EXIT_FAILURE);
     }
-    puts("Data Send\n");
-
-    // Receive a reply from the server
-    if ((recv_size = recv(s, server_reply, 2000, 0)) == SOCKET_ERROR)
+    if (recv(server_fd, server_reply, 200, 0) < 0)
     {
-        puts("recv failed");
+        puts("recv send mail error");
+        exit(EXIT_FAILURE);
+    }
+    else if (strstr(server_reply, "success connect") == NULL)
+    {
+        puts("recv not success");
+        exit(EXIT_FAILURE);
     }
 
-    puts("Reply received\n");
-
-    // Add a NULL terminating character to make it a proper string before printing
-    server_reply[recv_size] = '\0';
-    puts(server_reply);
-
-    return 0;
+    pthread_create(&ID_THREAD_SOCKET, NULL, listen_socket, NULL);
 }

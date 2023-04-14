@@ -1,35 +1,53 @@
-#include <stdlib.h>
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <gtk/gtkx.h>
-#include <libgen.h>
-#include <math.h>
+static GtkBuilder *builder;
+static GtkWidget *window;
+static GtkCssProvider *provider;
+static GtkListBox *listbox;
+static GtkWidget *input_message;
+static GtkWidget *label_mail_partner
 
-GtkBuilder *builder;
-GtkWidget *window;
-GtkCssProvider *provider;
-GtkListBox *listbox;
-
-char data_message[14][100] = {"Hi hello hello hello hello hello hello hello hello hello hello", "Hello", "How are you today", "I'm good, And you", "I'm slepy", "What do you doing", "I play game", "yub, what is your game", "LOL, do you want enjoy with me", "Ok", "What time do you want play", "hmmmm", "Tonight", "20h"};
-int data_message_type[14] = {0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0};
-int n = 14;
-
-static void add_item_to_list_box(char *message, int message_type);
-
-static void btn_send_message_clicked()
+    static void
+    add_item_to_list_box(const char *message, int message_type);
+static void handle_back_chat()
 {
-    add_item_to_list_box("test thoi nha", 1);
+    pthread_cancel(ID_THREAD_SOCKET);
+    gtk_widget_destroy(window);
+    closesocket(server_fd);
+    gtk_main_quit();
+    PROCESSINIT();
 }
 
-void css_set(GtkWidget *g_widget, GtkCssProvider *provider)
+static void notify_offline()
 {
-    GtkStyleContext *context = gtk_widget_get_style_context(g_widget);
-    gtk_style_context_add_provider(context, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+    gtk_label_set_text(GTK_LABEL(label_mail_partner), "User are not online, messages will not send");
 }
 
-static void add_item_to_list_box(char *message, int message_type)
+static void handle_back_to_everyone()
+{
+    pthread_cancel(ID_THREAD_SOCKET);
+    closesocket(server_fd);
+    gtk_widget_destroy(window);
+    gtk_main_quit();
+    Everyone();
+}
+
+static void btn_send_message_clicked(GtkWidget *e)
+{
+    const char *message_send = gtk_entry_get_text((GTK_ENTRY(input_message)));
+    if (send_data_socket(message_send, mail_selected) == 0)
+    {
+        add_item_to_list_box(message_send, 1);
+        gtk_entry_set_text((GTK_ENTRY(input_message)), "");
+        gtk_widget_show_all(GTK_WIDGET(listbox));
+    }
+}
+
+void recieve_message(const char *recieve_message_text)
+{
+    add_item_to_list_box(recieve_message_text, 0);
+    gtk_widget_show_all(GTK_WIDGET(listbox));
+}
+
+static void add_item_to_list_box(const char *message, int message_type)
 {
     GtkWidget *label = gtk_label_new(message);
     GtkWidget *row = gtk_list_box_row_new();
@@ -43,7 +61,6 @@ static void add_item_to_list_box(char *message, int message_type)
     }
     else
     {
-        printf("click");
 
         gtk_widget_set_halign(row, GTK_ALIGN_END);
         gtk_style_context_add_class(context, "my_message");
@@ -54,42 +71,36 @@ static void add_item_to_list_box(char *message, int message_type)
     gtk_list_box_insert(listbox, row, -1);
 }
 
-int main(int agrc, char *agrv[])
+int Chat()
 {
 
-    gtk_init(&agrc, &agrv);
-
-    builder = gtk_builder_new_from_file("Chat.glade");
+    builder = gtk_builder_new_from_file("./pages/Chat/Chat.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "chat_page"));
 
     provider = gtk_css_provider_new();
-    gtk_css_provider_load_from_path(provider, "./style.css", NULL);
+    gtk_css_provider_load_from_path(provider, "./pages/Chat/style.css", NULL);
+    GtkWidget *btn_back_dashboard = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_dashboard"));
+    GtkWidget *btn_back_everyone = GTK_WIDGET(gtk_builder_get_object(builder, "btn_back_everyone"));
 
-    GtkWidget *label_mail_partner = GTK_WIDGET(gtk_builder_get_object(builder, "mail_partner"));
+    label_mail_partner = GTK_WIDGET(gtk_builder_get_object(builder, "mail_partner"));
+    gtk_label_set_text(GTK_LABEL(label_mail_partner), mail_selected);
     GtkWidget *box = GTK_WIDGET(gtk_builder_get_object(builder, "box"));
     GtkWidget *container_list_message = GTK_WIDGET(gtk_builder_get_object(builder, "container_list_message"));
-    GtkWidget *input_message = GTK_WIDGET(gtk_builder_get_object(builder, "input_message"));
+    input_message = GTK_WIDGET(gtk_builder_get_object(builder, "input_message"));
     GtkWidget *btn_send_message = GTK_WIDGET(gtk_builder_get_object(builder, "btn_send_message"));
 
     listbox = GTK_LIST_BOX(container_list_message);
-    for (int i = 0; i <= n; i++)
-    {
-        add_item_to_list_box(data_message[i], data_message_type[i]);
-    }
-    gtk_container_foreach(GTK_CONTAINER(listbox), (GtkCallback)css_set, provider);
 
-    css_set(label_mail_partner, provider);
-    css_set(box, provider);
-    css_set(container_list_message, provider);
-    css_set(input_message, provider);
     css_set(window, provider);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
     g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(btn_send_message, "clicked", G_CALLBACK(btn_send_message_clicked), NULL);
+    g_signal_connect(btn_back_dashboard, "clicked", G_CALLBACK(handle_back_chat), NULL);
+    g_signal_connect(btn_back_everyone, "clicked", G_CALLBACK(handle_back_to_everyone), NULL);
+    gtk_window_maximize(GTK_WINDOW(window));
     gtk_widget_show_all(window);
-
+    Connect_socket();
     gtk_main();
-
-    return EXIT_SUCCESS;
 }
