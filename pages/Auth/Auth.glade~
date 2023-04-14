@@ -3,61 +3,13 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <!-- interface-css-provider-path style.css -->
-  <object class="GtkWindow" id="sign_in_window">
-    <property name="name">sign_in_window</property>
-    <property name="can-focus">False</property>
-    <property name="window-position">center</property>
-    <property name="default-width">2000</property>
-    <property name="default-height">2000</property>
-    <child>
-      <object class="GtkBox" id="main_window">
-        <property name="name">main_window</property>
-        <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="margin-top">18</property>
-            <property name="margin-bottom">18</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkTextView" id="text_view">
-            <property name="name">text_view</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">10</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <style>
-      <class name="text"/>
-    </style>
-  </object>
   <object class="GtkWindow" id="window">
     <property name="name">window</property>
     <property name="width-request">1000</property>
     <property name="height-request">700</property>
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Login</property>
+    <property name="icon-name">glade-brand-symbolic</property>
     <child>
       <object class="GtkOverlay">
         <property name="visible">True</property>
@@ -65,35 +17,33 @@
         <child>
           <object class="GtkBox" id="sign_in_frame">
             <property name="name">sign_in_frame</property>
-            <property name="width-request">400</property>
+            <property name="width-request">900</property>
             <property name="height-request">600</property>
-            <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
             <child>
+              <object class="GtkLabel" id="sign_in_label">
+                <property name="name">sign_in_label</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Sign In</property>
+                <property name="justify">center</property>
+                <style>
+                  <class name="window"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkBox">
-                <property name="name">test</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="sign_in_label">
-                    <property name="name">sign_in_label</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Sign In</property>
-                    <property name="justify">center</property>
-                    <style>
-                      <class name="green_bg"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkBox" id="sign_in_box">
                     <property name="name">sign_in_box</property>
@@ -102,7 +52,9 @@
                     <property name="can-focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="margin-top">32</property>
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="margin-top">165</property>
                     <property name="margin-bottom">2</property>
                     <property name="orientation">vertical</property>
                     <child>
@@ -146,27 +98,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLinkButton" id="forgot_btn">
-                    <property name="label" translatable="yes">Forgot Password</property>
-                    <property name="name">forgot_btn</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="margin-left">177</property>
-                    <property name="margin-start">177</property>
-                    <property name="margin-bottom">15</property>
-                    <property name="relief">none</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -179,6 +111,7 @@
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
+                    <property name="margin-top">50</property>
                     <style>
                       <class name="green_bg"/>
                       <class name="round_corner"/>
@@ -187,7 +120,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -201,7 +134,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">4</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
                 <child>
@@ -209,6 +142,7 @@
                     <property name="name">sign_up_now_box</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
+                    <property name="margin-top">79</property>
                     <property name="margin-bottom">20</property>
                     <property name="orientation">vertical</property>
                     <child>
@@ -248,24 +182,20 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">5</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
-                <style>
-                  <class name="shadow"/>
-                  <class name="round_corner"/>
-                </style>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <style>
               <class name="round_corner"/>
-              <class name="test_animation"/>
               <class name="white_bg"/>
+              <class name="shadow"/>
             </style>
           </object>
           <packing>
@@ -275,58 +205,91 @@
         <child type="overlay">
           <object class="GtkBox" id="sign_up_frame">
             <property name="name">sign_up_frame</property>
-            <property name="width-request">400</property>
+            <property name="width-request">900</property>
             <property name="height-request">600</property>
+            <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
             <child>
               <object class="GtkBox">
-                <property name="name">test</property>
+                <property name="name">sign_up_container</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="sign_up_label">
-                    <property name="name">sign_in_label</property>
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">Sign Up</property>
-                    <property name="justify">center</property>
-                    <style>
-                      <class name="green_bg"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="sign_up_box">
-                    <property name="name">sign_in_box</property>
-                    <property name="width-request">300</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="margin-top">32</property>
-                    <property name="margin-bottom">38</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkEntry" id="fullname_sign_up">
-                        <property name="name">fullname_sign_up</property>
+                      <object class="GtkBox" id="sign_up_box">
+                        <property name="name">sign_in_box</property>
+                        <property name="width-request">300</property>
                         <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="margin-bottom">15</property>
-                        <property name="placeholder-text" translatable="yes">Fullname</property>
-                        <property name="input-purpose">password</property>
-                        <style>
-                          <class name="round_corner"/>
-                        </style>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="margin-start">20</property>
+                        <property name="margin-end">20</property>
+                        <property name="margin-top">155</property>
+                        <property name="margin-bottom">38</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkEntry" id="fullname_sign_up">
+                            <property name="name">fullname_sign_up</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="margin-bottom">15</property>
+                            <property name="placeholder-text" translatable="yes">Fullname</property>
+                            <property name="input-purpose">password</property>
+                            <style>
+                              <class name="round_corner"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="email_sign_up">
+                            <property name="name">email_sign_up</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="margin-bottom">15</property>
+                            <property name="placeholder-text" translatable="yes">Email</property>
+                            <property name="input-purpose">email</property>
+                            <style>
+                              <class name="round_corner"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="password_sign_up">
+                            <property name="name">password</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="margin-bottom">15</property>
+                            <property name="visibility">False</property>
+                            <property name="invisible-char">●</property>
+                            <property name="placeholder-text" translatable="yes">Password</property>
+                            <property name="input-purpose">password</property>
+                            <style>
+                              <class name="round_corner"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -335,14 +298,18 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="email_sign_up">
-                        <property name="name">email_sign_up</property>
+                      <object class="GtkButton" id="sign_up_btn">
+                        <property name="label" translatable="yes">SIGN UP</property>
+                        <property name="name">sign_up_btn</property>
+                        <property name="width-request">300</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
                         <property name="margin-bottom">15</property>
-                        <property name="placeholder-text" translatable="yes">Email</property>
-                        <property name="input-purpose">email</property>
                         <style>
+                          <class name="green_bg"/>
                           <class name="round_corner"/>
                         </style>
                       </object>
@@ -353,18 +320,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="password_sign_up">
-                        <property name="name">password</property>
+                      <object class="GtkLabel" id="sign_up_check">
+                        <property name="name">sign_up_check</property>
+                        <property name="height-request">40</property>
                         <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="margin-bottom">15</property>
-                        <property name="visibility">False</property>
-                        <property name="invisible-char">●</property>
-                        <property name="placeholder-text" translatable="yes">Password</property>
-                        <property name="input-purpose">password</property>
-                        <style>
-                          <class name="round_corner"/>
-                        </style>
+                        <property name="can-focus">False</property>
+                        <property name="margin-bottom">25</property>
+                        <property name="justify">center</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -372,117 +334,101 @@
                         <property name="position">2</property>
                       </packing>
                     </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="sign_up_btn">
-                    <property name="label" translatable="yes">SIGN UP</property>
-                    <property name="name">sign_up_btn</property>
-                    <property name="width-request">300</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="margin-bottom">15</property>
-                    <style>
-                      <class name="green_bg"/>
-                      <class name="round_corner"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="sign_up_check">
-                    <property name="name">sign_up_check</property>
-                    <property name="height-request">40</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-bottom">15</property>
-                    <property name="justify">center</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkBox" id="sign_in_now_box">
-                    <property name="name">sign_in_now_box</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-bottom">20</property>
-                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel" id="have_account_label">
-                        <property name="name">have_account_label</property>
+                      <object class="GtkBox" id="sign_in_now_box">
+                        <property name="name">sign_in_now_box</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Have an account?</property>
+                        <property name="margin-top">79</property>
+                        <property name="margin-bottom">20</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel" id="have_account_label">
+                            <property name="name">have_account_label</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">Have an account?</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="sign_in_now_btn">
+                            <property name="label" translatable="yes">SIGN IN NOW</property>
+                            <property name="name">sign_in_now_btn</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="relief">none</property>
+                            <style>
+                              <class name="green_text"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="sign_in_now_btn">
-                        <property name="label" translatable="yes">SIGN IN NOW</property>
-                        <property name="name">sign_in_now_btn</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="relief">none</property>
-                        <style>
-                          <class name="green_text"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">4</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <style>
-                  <class name="shadow"/>
                   <class name="round_corner"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="sign_up_label">
+                <property name="name">sign_up_label</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Sign Up</property>
+                <property name="justify">center</property>
+                <style>
+                  <class name="window"/>
                 </style>
               </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <style>
               <class name="round_corner"/>
+              <class name="white_bg"/>
+              <class name="shadow"/>
             </style>
           </object>
+          <packing>
+            <property name="index">1</property>
+          </packing>
         </child>
       </object>
     </child>
-    <style>
-      <class name="bg_animation"/>
-    </style>
   </object>
 </interface>

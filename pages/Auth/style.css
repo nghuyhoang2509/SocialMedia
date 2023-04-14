@@ -3,6 +3,13 @@
   color: #f2f2f2;
   font-weight: bold;
 }
+.window {
+  background-image: url("https://f-code.tech/static/media/background.5d17ffe36988d38fdec1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #4ad97c;
+  font-weight: bold;
+}
 .white_bg {
   background: #f6f5f4;
 }
@@ -24,7 +31,15 @@
 }
 #sign_in_label {
   font-size: xx-large;
-  border-radius: 13px 13px 0px 0px;
+  border-radius: 13px 0px 0px 13px;
+}
+#sign_up_label {
+  font-size: xx-large;
+  border-radius: 0px 13px 13px 0px;
+}
+#round_corner {
+  border-radius: 13px;
+  border-style: none;
 }
 
 #sign_in_check,
