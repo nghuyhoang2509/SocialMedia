@@ -3,10 +3,10 @@ static GtkWidget *window;
 static GtkCssProvider *provider;
 static GtkListBox *listbox;
 static GtkWidget *input_message;
-static GtkWidget *label_mail_partner
+static GtkWidget *label_mail_partner;
 
-    static void
-    add_item_to_list_box(const char *message, int message_type);
+static void
+add_item_to_list_box(const char *message, int message_type);
 static void handle_back_chat()
 {
     pthread_cancel(ID_THREAD_SOCKET);
@@ -19,6 +19,7 @@ static void handle_back_chat()
 static void notify_offline()
 {
     gtk_label_set_text(GTK_LABEL(label_mail_partner), "User are not online, messages will not send");
+    gtk_widget_show_all(label_mail_partner);
 }
 
 static void handle_back_to_everyone()

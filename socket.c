@@ -77,7 +77,7 @@ int Connect_socket()
 
     printf("Socket created.\n");
 
-    server.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server.sin_addr.s_addr = inet_addr("20.81.191.47"); // 20.81.191.47
     server.sin_family = AF_INET;
     server.sin_port = htons(9001);
 
